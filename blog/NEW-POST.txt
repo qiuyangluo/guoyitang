@@ -1,0 +1,31 @@
+Weekly blog workflow (健康专栏)
+================================
+
+1) Copy blog/_template.html → blog/posts/YOUR-SLUG.html
+   - Replace SLUG in filename with a short English slug (no spaces), e.g. summer-dampness-tcm
+   - Edit <title>, meta description, canonical URL, <h1>, date, body, disclaimer if needed
+
+2) Open assets/blog-manifest.js (primary — works without a web server)
+   OR keep data/blog-manifest.json in sync if you rely on fetch only.
+   - Set "updated" to today (YYYY-MM-DD)
+   - Add one object at the START of the "posts" array (newest first):
+     {
+       "slug": "your-slug",
+       "title": "文章标题",
+       "date": "2026-04-07",
+       "excerpt": "列表页摘要，一两句话。",
+       "author": "国医堂"
+     }
+   - slug must match the file name: posts/your-slug.html
+
+3) Deploy: blog/, assets/blog-manifest.js, assets/blog-index.js, assets/blog.css
+   (optional: data/blog-manifest.json for fetch fallback)
+
+4) Local preview: run a static server from the site root (fetch() will not load JSON from file://).
+   Example: python3 -m http.server 8080
+   Then open http://localhost:8080/blog/
+
+Notes
+-----
+- Listing is built by assets/blog-index.js from the manifest only; the article file must exist or links 404.
+- Keep excerpts professional; avoid guaranteed cure claims.

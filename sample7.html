@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柳树健康中医诊所 - 传统中医与针灸诊所</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --cream-light: #f8faf8;
+            --cream-medium: #f0f4f0;
+            --cream-deep: #e8f0e8;
+            --green-soft: #7fb069;
+            --green-medium: #5f8a44;
+            --green-dark: #456b32;
+            --green-deep: #2d4a1f;
+            --text-dark: #2d3a2d;
+            --text-medium: #4a5a4a;
+            --text-light: #6b7a6b;
+            --white: #ffffff;
+            --warm-white: #fcfdfc;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Microsoft YaHei', 'Hiragino Sans GB', 'WenQuanYi Micro Hei', sans-serif;
+            line-height: 1.7;
+            color: var(--text-dark);
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(252, 253, 252, 0.95);
+            backdrop-filter: blur(20px);
+            z-index: 1000;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--cream-deep);
+            transition: all 0.3s ease;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 500;
+            color: var(--green-dark);
+            letter-spacing: 0.1em;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 400;
+            transition: color 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--green-medium);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .language-btn {
+            background: var(--cream-medium);
+            color: var(--text-dark);
+            padding: 0.6rem 1rem;
+            border: 1px solid var(--cream-deep);
+            border-radius: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .language-btn:hover {
+            background: var(--green-soft);
+            color: white;
+            border-color: var(--green-soft);
+        }
+
+        .cta-nav {
+            background: var(--green-medium);
+            color: white;
+            padding: 0.875rem 2rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .cta-nav:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(95, 138, 68, 0.3);
+        }
+
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-dark);
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .mobile-menu {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            background: white;
+            border-top: 1px solid var(--cream-deep);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            padding: 1rem 0;
+        }
+
+        .mobile-nav-links li {
+            border-bottom: 1px solid var(--cream-light);
+        }
+
+        .mobile-nav-links a {
+            display: block;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            color: var(--text-medium);
+            font-weight: 400;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-nav-links a:hover {
+            background: var(--cream-light);
+            color: var(--green-medium);
+        }
+
+        .mobile-actions {
+            padding: 1rem 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                        url('https://images.unsplash.com/photo-1631248055158-edec7a3c072b?q=80&w=2061&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            padding: 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-size: 3.8rem;
+            margin-bottom: 2rem;
+            font-weight: 300;
+            line-height: 1.2;
+        }
+
+        .hero-content p {
+            font-size: 1.4rem;
+            margin-bottom: 3rem;
+            max-width: 600px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            background: var(--green-medium);
+            color: white;
+            padding: 1.2rem 3rem;
+            border: none;
+            border-radius: 35px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .cta-btn:hover {
+            background: var(--green-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 35px rgba(95, 138, 68, 0.3);
+        }
+
+        /* Common Styles */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 8rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 3rem;
+            color: var(--text-dark);
+            font-weight: 300;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: var(--text-medium);
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+
+        /* About Section */
+        .about {
+            background: var(--warm-white);
+        }
+
+        .about-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-content {
+            background: var(--cream-light);
+            padding: 4rem;
+            border-radius: 25px;
+            border: 2px solid var(--cream-deep);
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: var(--text-medium);
+        }
+
+        .about-image img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 25px 50px rgba(95, 138, 68, 0.15);
+        }
+
+        /* Services Section */
+        .services {
+            background: white;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: var(--warm-white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(95, 138, 68, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid var(--cream-deep);
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 45px rgba(95, 138, 68, 0.2);
+            border-color: var(--green-soft);
+        }
+
+        .service-image {
+            height: 250px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .service-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(127, 176, 105, 0.1), rgba(127, 176, 105, 0.05));
+        }
+
+        .service-content {
+            padding: 2.5rem;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .service-content p {
+            color: var(--text-medium);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .learn-more {
+            background: var(--green-medium);
+            color: white;
+            padding: 0.8rem 1.8rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .learn-more:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Doctors Section */
+        .doctors {
+            background: var(--cream-light);
+        }
+
+        .doctor-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .doctor-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(95, 138, 68, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid var(--cream-deep);
+        }
+
+        .doctor-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 50px rgba(95, 138, 68, 0.2);
+            border-color: var(--green-soft);
+        }
+
+        .doctor-image {
+            width: 8rem;
+            height: 8rem;
+            border-radius: 50%;
+            margin: 0 auto 2rem;
+            object-fit: cover;
+            border: 4px solid var(--cream-medium);
+        }
+
+        .doctor-name {
+            font-size: 1.5rem;
+            font-weight: 400;
+            color: var(--text-dark);
+            margin-bottom: 0.8rem;
+        }
+
+        .doctor-specialty {
+            color: var(--green-medium);
+            font-weight: 500;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .doctor-bio {
+            color: var(--text-medium);
+            line-height: 1.8;
+            font-size: 0.95rem;
+        }
+
+        /* Case Studies Section */
+        .case-studies {
+            background: white;
+        }
+
+        .case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin-top: 4rem;
+        }
+
+        .case-card {
+            background: var(--cream-light);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(95, 138, 68, 0.1);
+            transition: all 0.3s ease;
+            border: 2px solid var(--cream-deep);
+        }
+
+        .case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 45px rgba(95, 138, 68, 0.2);
+        }
+
+        .case-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .case-tag {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: var(--green-medium);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .case-content {
+            padding: 2.5rem;
+        }
+
+        .case-title {
+            font-size: 1.4rem;
+            font-weight: 500;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+
+        .case-info {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+            color: var(--green-medium);
+            flex-wrap: wrap;
+        }
+
+        .case-description {
+            color: var(--text-medium);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-result {
+            background: rgba(127, 176, 105, 0.1);
+            padding: 1rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--green-medium);
+        }
+
+        .case-result strong {
+            color: var(--green-dark);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: var(--green-medium);
+            color: white;
+        }
+
+        .testimonials .section-title {
+            color: white;
+        }
+
+        .testimonials .section-subtitle {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .testimonial-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .testimonial-stars {
+            color: #ffd700;
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-text {
+            line-height: 1.8;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 1.1rem;
+        }
+
+        .patient-name {
+            font-weight: 500;
+            color: white;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--green-dark);
+            color: white;
+            padding: 4rem 0 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1.5rem;
+            color: white;
+            font-weight: 400;
+            font-size: 1.3rem;
+        }
+
+        .footer-section p,
+        .footer-section li {
+            margin-bottom: 1rem;
+            line-height: 1.7;
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: white;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(95, 138, 68, 0.8);
+            backdrop-filter: blur(10px);
+        }
+
+        .modal-content {
+            background: white;
+            margin: 3% auto;
+            padding: 3rem;
+            border-radius: 25px;
+            width: 90%;
+            max-width: 600px;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 30px 60px rgba(95, 138, 68, 0.3);
+        }
+
+        .modal-close {
+            position: absolute;
+            right: 2rem;
+            top: 2rem;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-light);
+            transition: color 0.3s ease;
+        }
+
+        .modal-close:hover {
+            color: var(--text-dark);
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+            color: var(--text-dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem 1.5rem;
+            border: 2px solid var(--cream-deep);
+            border-radius: 15px;
+            background: white;
+            color: var(--text-dark);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--green-medium);
+            box-shadow: 0 0 0 3px rgba(95, 138, 68, 0.1);
+        }
+
+        .submit-btn {
+            background: var(--green-medium);
+            color: white;
+            padding: 1.3rem 3rem;
+            border: none;
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            font-size: 1.1rem;
+        }
+
+        .submit-btn:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(95, 138, 68, 0.3);
+        }
+
+        /* Animations */
+        .fade-in-up {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease-out;
+        }
+
+        .fade-in-up.animated {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Mobile Responsive Design */
+        @media (max-width: 1024px) {
+            .container {
+                padding: 0 1.5rem;
+            }
+
+            .nav-container {
+                padding: 0 1.5rem;
+            }
+
+            .section {
+                padding: 6rem 0;
+            }
+
+            .about-container {
+                gap: 4rem;
+            }
+
+            .service-grid {
+                grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+                gap: 2rem;
+            }
+
+            .case-grid {
+                grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+                gap: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Navigation Mobile */
+            .nav-links {
+                display: none;
+            }
+
+            .nav-actions {
+                display: none;
+            }
+
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            /* Hero Mobile */
+            .hero {
+                min-height: 80vh;
+                padding: 0 1rem;
+            }
+
+            .hero-content h1 {
+                font-size: 2.5rem;
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-content p {
+                font-size: 1.1rem;
+                margin-bottom: 2rem;
+            }
+
+            .cta-btn {
+                padding: 1rem 2.5rem;
+                font-size: 1rem;
+            }
+
+            /* Sections Mobile */
+            .section {
+                padding: 4rem 0;
+            }
+
+            .section-title {
+                font-size: 2.2rem;
+                margin-bottom: 2rem;
+            }
+
+            .section-subtitle {
+                font-size: 1.1rem;
+                margin-bottom: 3rem;
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            /* About Mobile */
+            .about-container {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+
+            .about-content {
+                padding: 2.5rem;
+            }
+
+            .about-text p {
+                font-size: 1rem;
+            }
+
+            /* Services Mobile */
+            .service-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .service-card {
+                margin: 0;
+            }
+
+            .service-image {
+                height: 200px;
+            }
+
+            .service-content {
+                padding: 2rem;
+            }
+
+            .service-content h3 {
+                font-size: 1.3rem;
+            }
+
+            .service-content p {
+                font-size: 0.95rem;
+            }
+
+            /* Doctors Mobile */
+            .doctor-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .doctor-card {
+                padding: 2rem;
+            }
+
+            .doctor-image {
+                width: 6rem;
+                height: 6rem;
+            }
+
+            .doctor-name {
+                font-size: 1.3rem;
+            }
+
+            .doctor-specialty {
+                font-size: 1rem;
+            }
+
+            .doctor-bio {
+                font-size: 0.9rem;
+            }
+
+            /* Cases Mobile */
+            .case-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                margin-top: 2rem;
+            }
+
+            .case-content {
+                padding: 2rem;
+            }
+
+            .case-title {
+                font-size: 1.2rem;
+            }
+
+            .case-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .case-description {
+                font-size: 0.95rem;
+            }
+
+            /* Testimonials Mobile */
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .testimonial-card {
+                padding: 2rem;
+            }
+
+            .testimonial-text {
+                font-size: 1rem;
+            }
+
+            /* Footer Mobile */
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .footer-section {
+                padding: 0 1rem;
+            }
+
+            .footer-section h3 {
+                font-size: 1.2rem;
+            }
+
+            .footer-section p,
+            .footer-section li {
+                font-size: 0.95rem;
+            }
+
+            /* Modal Mobile */
+            .modal-content {
+                margin: 5% auto;
+                padding: 2rem;
+                width: 95%;
+                max-height: 85vh;
+            }
+
+            .modal-close {
+                right: 1.5rem;
+                top: 1.5rem;
+                font-size: 1.8rem;
+            }
+
+            .form-group {
+                margin-bottom: 1.5rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 1rem;
+                font-size: 16px; /* Prevents zoom on iOS */
+            }
+
+            .submit-btn {
+                padding: 1.2rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small mobile devices */
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+
+            .about-content,
+            .service-content,
+            .doctor-card,
+            .case-content,
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .service-image,
+            .case-image {
+                height: 180px;
+            }
+
+            .doctor-image {
+                width: 5rem;
+                height: 5rem;
+            }
+
+            .modal-content {
+                padding: 1.5rem;
+            }
+
+            .form-group input,
+            .form-group select,
+            .form-group textarea {
+                padding: 0.875rem;
+            }
+        }
+
+        /* Touch optimizations */
+        @media (hover: none) {
+            .service-card:hover,
+            .doctor-card:hover,
+            .case-card:hover,
+            .testimonial-card:hover {
+                transform: none;
+            }
+
+            .cta-btn:hover,
+            .cta-nav:hover,
+            .learn-more:hover,
+            .submit-btn:hover {
+                transform: none;
+            }
+        }
+
+        /* High DPI displays */
+        @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+            .hero {
+                background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)),
+                                url('https://images.unsplash.com/photo-1631248055158-edec7a3c072b?q=80&w=2061&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">柳树健康诊所</div>
+            <ul class="nav-links">
+                <li><a href="#home">首页</a></li>
+                <li><a href="#about">诊所简介</a></li>
+                <li><a href="#services">服务项目</a></li>
+                <li><a href="#doctors">医生团队</a></li>
+                <li><a href="#cases">案例分享</a></li>
+                <li><a href="#testimonials">患者好评</a></li>
+                <li><a href="#contact">联系我们</a></li>
+            </ul>
+            <div class="nav-actions">
+                <a href="file:///Users/apple/Downloads/sample8_en.html" class="language-btn">
+                    🇺🇸 English
+                </a>
+                <button class="cta-nav" onclick="openModal()">预约咨询</button>
+            </div>
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">☰</button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="mobile-nav-links">
+                <li><a href="#home" onclick="closeMobileMenu()">首页</a></li>
+                <li><a href="#about" onclick="closeMobileMenu()">诊所简介</a></li>
+                <li><a href="#services" onclick="closeMobileMenu()">服务项目</a></li>
+                <li><a href="#doctors" onclick="closeMobileMenu()">医生团队</a></li>
+                <li><a href="#cases" onclick="closeMobileMenu()">案例分享</a></li>
+                <li><a href="#testimonials" onclick="closeMobileMenu()">患者好评</a></li>
+                <li><a href="#contact" onclick="closeMobileMenu()">联系我们</a></li>
+            </ul>
+            <div class="mobile-actions">
+                <a href="file:///Users/apple/Downloads/sample8_en.html" class="language-btn">
+                    🇺🇸 English Version
+                </a>
+                <button class="cta-nav" onclick="openModal(); closeMobileMenu();" style="width: 100%;">预约咨询</button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content fade-in-up">
+            <h1>柳树健康中医诊所</h1>
+            <p>传承千年中医智慧，守护现代人健康<br>专业的中医诊疗服务，温馨舒适的就诊环境</p>
+            <button class="cta-btn" onclick="openModal()">立即预约咨询</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section about">
+        <div class="container">
+            <h2 class="section-title">诊所简介</h2>
+            <div class="about-container">
+                <div class="about-content fade-in-up">
+                    <div class="about-text">
+                        <p>柳树健康中医诊所成立于2008年，秉承"仁心仁术，和谐健康"的理念，致力于为患者提供专业、贴心的中医诊疗服务。</p>
+                        <p>我们拥有一支经验丰富的中医师团队，擅长运用传统中医理论结合现代诊疗技术，为患者量身定制个性化治疗方案。诊所环境温馨舒适，设施完善，为患者营造安心的就诊体验。</p>
+                        <p>多年来，我们始终坚持传统中医精髓，在针灸、推拿、中药调理等领域积累了丰富经验，深受患者信赖和好评。</p>
+                    </div>
+                </div>
+                <div class="about-image fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="诊所环境">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="section services">
+        <div class="container">
+            <h2 class="section-title">服务项目</h2>
+            <p class="section-subtitle">我们提供全面的传统中医服务，包括针灸、中药调理、推拿按摩等，每项治疗都根据患者的具体需求量身定制，确保最佳的治疗效果。</p>
+
+            <div class="service-grid">
+                <div class="service-card fade-in-up">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="service-content">
+                        <h3>针灸治疗</h3>
+                        <p>针灸是中医传统疗法，通过在特定穴位插入细针来调节人体气血流动，缓解疼痛，促进身体平衡和整体健康。</p>
+                        <button class="learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in-up">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1594824804732-ca58aa084fe4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="service-content">
+                        <h3>中药调理</h3>
+                        <p>中药疗法运用天然植物药材，通过个性化配方来治疗和预防各种健康问题，注重调节身体内在平衡。</p>
+                        <button class="learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in-up">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="service-content">
+                        <h3>拔罐疗法</h3>
+                        <p>拔罐是传统治疗方法，在皮肤上使用吸力罐来增强血液循环，缓解肌肉疼痛或紧张感。</p>
+                        <button class="learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in-up">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="service-content">
+                        <h3>艾灸疗法</h3>
+                        <p>艾灸通过燃烧干艾草产生的热量刺激特定穴位，促进气血运行，增强身体免疫力。</p>
+                        <button class="learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in-up">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="service-content">
+                        <h3>推拿按摩</h3>
+                        <p>推拿按摩运用压力和韵律手法针对特定穴位，促进平衡和治疗效果，缓解身体不适。</p>
+                        <button class="learn-more">了解详情</button>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in-up">
+                    <div class="service-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')"></div>
+                    <div class="service-content">
+                        <h3>刮痧疗法</h3>
+                        <p>刮痧使用光滑工具刺激特定区域，改善循环，缓解紧张感，是传统的保健治疗方法。</p>
+                        <button class="learn-more">了解详情</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Doctors Section -->
+    <section id="doctors" class="section doctors">
+        <div class="container">
+            <h2 class="section-title">医生团队</h2>
+            <p class="section-subtitle">我们的医生团队拥有丰富的临床经验和深厚的中医理论基础，为每位患者提供专业的诊疗服务。</p>
+
+            <div class="doctor-grid">
+                <div class="doctor-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="张明德医生" class="doctor-image">
+                    <h3 class="doctor-name">张明德 主任医师</h3>
+                    <div class="doctor-specialty">中医内科 · 针灸科</div>
+                    <p class="doctor-bio">从事中医临床工作30余年，擅长运用针灸、中药治疗各种内科疾病，在慢性病调理方面有独特见解。曾获得多项中医学术奖项。</p>
+                </div>
+
+                <div class="doctor-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="李慧敏医生" class="doctor-image">
+                    <h3 class="doctor-name">李慧敏 副主任医师</h3>
+                    <div class="doctor-specialty">中医妇科 · 调理科</div>
+                    <p class="doctor-bio">中医妇科专家，擅长运用中药调理女性内分泌失调、月经不调等妇科疾病，临床经验丰富，深受女性患者信赖。</p>
+                </div>
+
+                <div class="doctor-card fade-in-up">
+                    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="王建华医生" class="doctor-image">
+                    <h3 class="doctor-name">王建华 主治医师</h3>
+                    <div class="doctor-specialty">推拿科 · 骨伤科</div>
+                    <p class="doctor-bio">推拿按摩专家，对颈椎病、腰椎间盘突出等骨伤科疾病有丰富治疗经验，手法精湛，治疗效果显著。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies Section -->
+    <section id="cases" class="section case-studies">
+        <div class="container">
+            <h2 class="section-title">案例分享</h2>
+            <p class="section-subtitle">以下是我们诊所的一些真实治疗案例，展示了中医治疗的显著效果。每个案例都经过患者同意分享，希望能为有相似症状的患者提供参考。</p>
+
+            <div class="case-grid">
+                <div class="case-card fade-in-up">
+                    <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1559757175-0eb30cd8c063?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
+                        <div class="case-tag">针灸治疗</div>
+                    </div>
+                    <div class="case-content">
+                        <h4 class="case-title">慢性颈椎病康复案例</h4>
+                        <div class="case-info">
+                            <span>患者：陈先生 42岁</span>
+                            <span>治疗周期：6周</span>
+                        </div>
+                        <p class="case-description">患者因长期伏案工作导致严重颈椎病，颈部僵硬疼痛，头晕头痛，严重影响工作和生活。通过张医生的针灸治疗配合推拿手法，逐步缓解症状。</p>
+                        <div class="case-result">
+                            <strong>治疗效果：</strong>经过6周的系统治疗，患者颈部疼痛明显减轻，头晕症状消失，颈部活动范围恢复正常，工作效率显著提高。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card fade-in-up">
+                    <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1594824804732-ca58aa084fe4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
+                        <div class="case-tag">中药调理</div>
+                    </div>
+                    <div class="case-content">
+                        <h4 class="case-title">月经不调成功调理</h4>
+                        <div class="case-info">
+                            <span>患者：李女士 28岁</span>
+                            <span>治疗周期：3个月</span>
+                        </div>
+                        <p class="case-description">患者月经周期紊乱，经量过少，伴有痛经、面色苍白等症状。李医生通过详细问诊和体质辨识，制定了个性化的中药调理方案。</p>
+                        <div class="case-result">
+                            <strong>治疗效果：</strong>3个月治疗后，患者月经周期恢复正常，经量适中，痛经症状明显改善，面色红润，精神状态良好。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card fade-in-up">
+                    <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
+                        <div class="case-tag">推拿治疗</div>
+                    </div>
+                    <div class="case-content">
+                        <h4 class="case-title">腰椎间盘突出康复</h4>
+                        <div class="case-info">
+                            <span>患者：王先生 35岁</span>
+                            <span>治疗周期：8周</span>
+                        </div>
+                        <p class="case-description">患者因搬重物导致腰椎间盘突出，腰痛伴下肢放射痛，行走困难。王医生采用中医推拿手法配合针灸治疗，逐步缓解症状。</p>
+                        <div class="case-result">
+                            <strong>治疗效果：</strong>8周治疗后，患者腰痛基本消失，下肢放射痛完全缓解，正常活动恢复，避免了手术治疗的风险。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card fade-in-up">
+                    <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1544161515-4ab6ce6db874?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
+                        <div class="case-tag">综合治疗</div>
+                    </div>
+                    <div class="case-content">
+                        <h4 class="case-title">慢性胃炎综合调理</h4>
+                        <div class="case-info">
+                            <span>患者：刘女士 45岁</span>
+                            <span>治疗周期：10周</span>
+                        </div>
+                        <p class="case-description">患者患有慢性胃炎多年，胃痛胃胀，食欲不振，消化不良。张医生采用中药内调配合针灸外治的综合治疗方案。</p>
+                        <div class="case-result">
+                            <strong>治疗效果：</strong>10周治疗后，患者胃痛症状基本消失，食欲明显改善，消化功能正常，胃镜复查显示炎症明显减轻。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card fade-in-up">
+                    <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1559757148-5c350d0d3c56?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
+                        <div class="case-tag">艾灸治疗</div>
+                    </div>
+                    <div class="case-content">
+                        <h4 class="case-title">失眠多梦调理成功</h4>
+                        <div class="case-info">
+                            <span>患者：赵女士 38岁</span>
+                            <span>治疗周期：4周</span>
+                        </div>
+                        <p class="case-description">患者因工作压力大导致严重失眠，入睡困难，多梦易醒，白天精神疲惫。通过艾灸治疗配合中药调理，调节患者的睡眠质量。</p>
+                        <div class="case-result">
+                            <strong>治疗效果：</strong>4周治疗后，患者睡眠质量显著改善，能够快速入睡，睡眠深沉，白天精神饱满，工作效率大幅提升。
+                        </div>
+                    </div>
+                </div>
+
+                <div class="case-card fade-in-up">
+                    <div class="case-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80')">
+                        <div class="case-tag">刮痧治疗</div>
+                    </div>
+                    <div class="case-content">
+                        <h4 class="case-title">肩周炎疼痛缓解</h4>
+                        <div class="case-info">
+                            <span>患者：张先生 52岁</span>
+                            <span>治疗周期：5周</span>
+                        </div>
+                        <p class="case-description">患者右肩疼痛半年，肩关节活动受限，夜间疼痛加重影响睡眠。王医生采用刮痧治疗配合推拿手法，疏通经络，活血化瘀。</p>
+                        <div class="case-result">
+                            <strong>治疗效果：</strong>5周治疗后，患者肩部疼痛明显减轻，肩关节活动范围显著改善，夜间睡眠质量提高，日常生活恢复正常。
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section id="testimonials" class="section testimonials">
+        <div class="container">
+            <h2 class="section-title">患者好评</h2>
+            <p class="section-subtitle">来自我们患者的真实反馈，见证中医治疗的神奇效果。</p>
+
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">
+                        "在柳树健康诊所治疗了几个月的慢性胃炎，张医生的中药调理非常有效，现在胃部不适基本消失了。医生很耐心，服务也很贴心。"
+                    </div>
+                    <div class="patient-name">— 刘女士</div>
+                </div>
+
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">
+                        "长期的颈椎病让我很痛苦，经朋友介绍来到这里。王医生的推拿手法很专业，几次治疗后明显好转，真的很感谢！"
+                    </div>
+                    <div class="patient-name">— 陈先生</div>
+                </div>
+
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">
+                        "李医生对妇科调理很有经验，针对我的情况制定了个性化的治疗方案，现在身体状况好了很多，月经也正常了。"
+                    </div>
+                    <div class="patient-name">— 赵女士</div>
+                </div>
+
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">
+                        "诊所环境很舒适，医生们都很专业负责。针灸治疗我的失眠问题效果很好，现在睡眠质量大大改善了。"
+                    </div>
+                    <div class="patient-name">— 孙先生</div>
+                </div>
+
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">
+                        "中药的调理效果确实不错，虽然见效慢但很稳定。医生会定期调整药方，感觉身体越来越好了。"
+                    </div>
+                    <div class="patient-name">— 周女士</div>
+                </div>
+
+                <div class="testimonial-card fade-in-up">
+                    <div class="testimonial-stars">★★★★★</div>
+                    <div class="testimonial-text">
+                        "拔罐和艾灸的组合治疗让我的腰痛问题得到了很好的缓解，医生的技术很专业，会继续来治疗。"
+                    </div>
+                    <div class="patient-name">— 吴先生</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>联系信息</h3>
+                    <p>📍 地址：温哥华市西四大道1234号201室</p>
+                    <p>📞 电话：(604) 555-0123</p>
+                    <p>📱 手机：(604) 555-0456</p>
+                    <p>📧 邮箱：info@willowtreeclinic.ca</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>营业时间</h3>
+                    <p>周一至周五：9:00 AM - 7:00 PM</p>
+                    <p>周六：10:00 AM - 5:00 PM</p>
+                    <p>周日：11:00 AM - 4:00 PM</p>
+                    <p>节假日请提前咨询</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="#about">诊所简介</a></li>
+                        <li><a href="#services">服务项目</a></li>
+                        <li><a href="#doctors">医生团队</a></li>
+                        <li><a href="#cases">案例分享</a></li>
+                        <li><a href="#testimonials">患者好评</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>关于我们</h3>
+                    <p>柳树健康中医诊所致力于传承中医文化，为患者提供专业、贴心的中医诊疗服务。</p>
+                    <p>预约咨询请拨打电话或点击在线预约。</p>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2024 柳树健康中医诊所 版权所有 | 由不列颠哥伦比亚省传统中医师学院(CTCMA)授权</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2 style="text-align: center; margin-bottom: 2rem; color: var(--green-medium);">在线预约</h2>
+            <form onsubmit="submitAppointment(event)">
+                <div class="form-group">
+                    <label for="name">姓名 *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">联系电话 *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">电子邮箱</label>
+                    <input type="email" id="email" name="email">
+                </div>
+
+                <div class="form-group">
+                    <label for="service">预约服务</label>
+                    <select id="service" name="service">
+                        <option value="">请选择服务项目</option>
+                        <option value="针灸">针灸治疗</option>
+                        <option value="中药">中药调理</option>
+                        <option value="拔罐">拔罐疗法</option>
+                        <option value="艾灸">艾灸疗法</option>
+                        <option value="推拿">推拿按摩</option>
+                        <option value="刮痧">刮痧疗法</option>
+                        <option value="综合">综合调理</option>
+                        <option value="咨询">健康咨询</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="doctor">指定医生</label>
+                    <select id="doctor" name="doctor">
+                        <option value="">请选择医生（可不选）</option>
+                        <option value="张明德">张明德 主任医师</option>
+                        <option value="李慧敏">李慧敏 副主任医师</option>
+                        <option value="王建华">王建华 主治医师</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="date">预约日期</label>
+                    <input type="date" id="date" name="date">
+                </div>
+
+                <div class="form-group">
+                    <label for="time">预约时间</label>
+                    <select id="time" name="time">
+                        <option value="">请选择时间</option>
+                        <option value="morning">上午 (9:00 AM - 12:00 PM)</option>
+                        <option value="afternoon">下午 (1:00 PM - 5:00 PM)</option>
+                        <option value="evening">傍晚 (5:00 PM - 7:00 PM)</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="message">症状描述</label>
+                    <textarea id="message" name="message" rows="4" placeholder="请简要描述您的症状或健康问题，以便医生更好地为您安排合适的治疗方案"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">提交预约</button>
+
+                <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 1.5rem; text-align: center;">
+                    我们将在24小时内联系您确认预约时间。初次咨询通常为60-90分钟。
+                </p>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+
+            mobileMenu.classList.toggle('active');
+            toggle.innerHTML = mobileMenu.classList.contains('active') ? '✕' : '☰';
+        }
+
+        function closeMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+
+            mobileMenu.classList.remove('active');
+            toggle.innerHTML = '☰';
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const toggle = document.querySelector('.mobile-menu-toggle');
+            const navbar = document.querySelector('.navbar');
+
+            if (!navbar.contains(event.target) && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navbarHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 100) {
+                navbar.style.background = 'rgba(252, 253, 252, 0.98)';
+                navbar.style.boxShadow = '0 2px 20px rgba(95, 138, 68, 0.1)';
+            } else {
+                navbar.style.background = 'rgba(252, 253, 252, 0.95)';
+                navbar.style.boxShadow = 'none';
+            }
+        });
+
+        // Modal functions
+        function openModal() {
+            document.getElementById('appointmentModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('appointmentModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('appointmentModal');
+            if (event.target == modal) {
+                closeModal();
+            }
+        }
+
+        // Set minimum date for appointment booking
+        document.addEventListener('DOMContentLoaded', function() {
+            const dateInput = document.getElementById('date');
+            const today = new Date();
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            dateInput.min = tomorrow.toISOString().split('T')[0];
+        });
+
+        // Form submission handlers
+        function submitAppointment(event) {
+            event.preventDefault();
+
+            const formData = new FormData(event.target);
+            const appointmentData = {};
+            for (let [key, value] of formData.entries()) {
+                appointmentData[key] = value;
+            }
+
+            console.log('预约信息:', appointmentData);
+
+            // Show success message
+            alert('预约提交成功！我们会在24小时内与您联系确认预约时间。感谢您选择柳树健康诊所！');
+
+            closeModal();
+            event.target.reset();
+        }
+
+        // Service buttons functionality
+        document.querySelectorAll('.learn-more').forEach(button => {
+            button.addEventListener('click', function() {
+                const serviceTitle = this.parentNode.querySelector('h3').textContent;
+                alert(`了解更多关于 "${serviceTitle}" 的信息。\n\n请联系我们：(604) 555-0123\n或点击"预约咨询"按钮进行在线预约。`);
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animated');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all elements with fade-in-up class
+        document.addEventListener('DOMContentLoaded', function() {
+            const animatedElements = document.querySelectorAll('.fade-in-up');
+            animatedElements.forEach(el => observer.observe(el));
+        });
+
+        // Add keyboard navigation for modal
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+                closeMobileMenu();
+            }
+        });
+
+        // Form validation enhancement for Canadian phone numbers
+        document.querySelectorAll('input[type="tel"]').forEach(input => {
+            input.addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\D/g, '');
+                if (value.length >= 6) {
+                    value = value.replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
+                }
+                e.target.value = value;
+            });
+        });
+
+        // Prevent zoom on iOS when focusing inputs
+        document.querySelectorAll('input, select, textarea').forEach(element => {
+            element.addEventListener('focus', function() {
+                if (window.innerWidth < 768) {
+                    const viewport = document.querySelector('meta[name="viewport"]');
+                    viewport.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0');
+
+                    setTimeout(() => {
+                        viewport.setAttribute('content', 'width=device-width, initial-scale=1.0');
+                    }, 500);
+                }
+            });
+        });
+
+        // Handle orientation change
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                window.scrollTo(0, window.scrollY);
+            }, 500);
+        });
+    </script>
+</body>
+</html>
