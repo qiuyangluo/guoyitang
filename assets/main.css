@@ -1,7 +1,5 @@
 /* Guoyitang — ink, rice-paper, moss & sage accent (harmonized with greens) */
-
-@import url("https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap");
-@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css");
+/* Webfonts load via assets/fonts-defer.css (non-render-blocking) */
 
 :root {
   --font-display: "ZCOOL Xiao Wei", "LXGW WenKai", "KaiTi", "STKaiti", serif;
@@ -71,7 +69,13 @@ body {
     radial-gradient(ellipse 120% 80% at 100% -20%, rgba(74, 107, 56, 0.06), transparent 50%),
     radial-gradient(ellipse 90% 60% at -10% 60%, rgba(147, 160, 107, 0.06), transparent 45%),
     linear-gradient(180deg, var(--warm-white) 0%, var(--cream-light) 55%, var(--warm-white) 100%);
-  background-attachment: fixed;
+  background-attachment: scroll;
+}
+
+@media (min-width: 769px) {
+  body {
+    background-attachment: fixed;
+  }
 }
 
 body::before {
@@ -385,7 +389,10 @@ p a:not([class]):hover {
     ),
     linear-gradient(118deg, rgba(22, 34, 18, 0.72) 0%, rgba(18, 26, 14, 0.25) 48%, rgba(14, 22, 12, 0.78) 100%),
     radial-gradient(ellipse 90% 70% at 18% 22%, rgba(147, 160, 107, 0.14), transparent 55%),
-    url("../image/hero.png");
+    image-set(
+      url("../image/hero.webp") type("image/webp"),
+      url("../image/hero.png") type("image/png")
+    );
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -708,6 +715,59 @@ p a:not([class]):hover {
 
 .intro-video-link-fallback a:hover {
   color: #f0e6c8;
+}
+
+/* YouTube: click-to-load iframe (avoids heavy third-party on first paint) */
+.intro-video-lite {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  background: #0f140c center / cover no-repeat;
+  cursor: pointer;
+  border: 0;
+  padding: 0;
+  display: block;
+  color: inherit;
+  font: inherit;
+  text-align: center;
+}
+
+.intro-video-lite:focus {
+  outline: 2px solid var(--brass-light);
+  outline-offset: 2px;
+}
+
+.intro-video-lite img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.intro-video-lite .intro-video-lite__play {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.62);
+  border: 3px solid rgba(255, 255, 255, 0.92);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+  pointer-events: none;
+}
+
+.intro-video-lite .intro-video-lite__play::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-40%, -50%);
+  border-style: solid;
+  border-width: 0.65rem 0 0.65rem 1.1rem;
+  border-color: transparent transparent transparent #fff;
 }
 
 /* About (two columns) — asymmetric overlap */
@@ -1671,6 +1731,13 @@ table.hours th {
   .hero {
     min-height: 88vh;
     padding: 4.75rem 1.25rem 2.5rem;
+  }
+
+  /* Faster LCP on mobile: skip staggered fade-in */
+  .hero-content > * {
+    opacity: 1;
+    animation: none;
+    transform: none;
   }
 
   .hero-sub {
