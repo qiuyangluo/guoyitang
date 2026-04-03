@@ -1,3 +1,4 @@
-/* Loaded async from HTML (media=print onload) so it does not block first paint */
+/* Async-loaded (see HTML media=print onload). Only regular + bold — not full style.css (~2MB+ subset woff2). */
 @import url("https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap");
-@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css");
+@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css");
+@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css");
