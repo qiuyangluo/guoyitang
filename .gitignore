@@ -1,5 +1,6 @@
 .DS_Store
 Thumbs.db
+node_modules/
 
 # Exceeds GitHub 100MB per-file limit — keep locally or host via CDN / Git LFS
 video/clinic-intro.mp4
