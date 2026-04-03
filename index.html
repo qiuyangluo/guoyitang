@@ -83,19 +83,18 @@
 <div class="container">
 <h2 class="section-title" id="videotitle">诊所介绍短片</h2>
 <div class="intro-video-frame">
-<video
+<div class="intro-video-embed">
+<iframe
   class="intro-video-player"
-  autoplay
-  muted
-  playsinline
-  controls
-  preload="metadata"
-  poster="image/hero.png"
-  aria-label="国医堂中医诊所介绍视频"
->
-  <source src="video/clinic-intro.mp4" type="video/mp4">
-  您的浏览器不支持 HTML5 视频。<a href="video/clinic-intro.mp4">下载视频文件（MP4）</a>
-</video>
+  src="https://www.youtube.com/embed/PJaHVioQYLI?rel=0"
+  title="国医堂中医诊所介绍视频（YouTube）"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+  loading="lazy"
+  referrerpolicy="strict-origin-when-cross-origin"
+></iframe>
+</div>
+<p class="intro-video-link-fallback"><a href="https://youtu.be/PJaHVioQYLI" target="_blank" rel="noopener noreferrer">在 YouTube 打开诊所介绍短片</a></p>
 </div>
 </div>
 </section>
