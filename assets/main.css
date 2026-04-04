@@ -1680,6 +1680,31 @@ table.hours th {
   justify-content: center;
 }
 
+/* In-view section reveal: transform-only (no opacity hide) — see assets/page-reveal.js */
+@media (prefers-reduced-motion: no-preference) {
+  .page-reveal-el {
+    transition: transform 0.34s var(--ease-out);
+  }
+
+  .page-reveal-el:not(.page-reveal-el--visible) {
+    transform: translate3d(0, 10px, 0);
+  }
+
+  .page-reveal-el.page-reveal-el--visible {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (max-width: 768px) and (prefers-reduced-motion: no-preference) {
+  .page-reveal-el {
+    transition-duration: 0.26s;
+  }
+
+  .page-reveal-el:not(.page-reveal-el--visible) {
+    transform: translate3d(0, 6px, 0);
+  }
+}
+
 @media (max-width: 1024px) {
   .container,
   .nav-container {
