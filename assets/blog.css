@@ -234,3 +234,88 @@
   padding-top: 1.5rem;
   border-top: 1px solid rgba(147, 160, 107, 0.15);
 }
+
+.blog-video-wrap {
+  margin: 1.75rem 0;
+}
+
+.blog-video-wrap video {
+  display: block;
+  width: 100%;
+  max-height: min(70vh, 720px);
+  height: auto;
+  border-radius: 12px;
+  background: #1a1a18;
+}
+
+.blog-video-caption {
+  margin-top: 0.5rem;
+  font-size: 0.92rem;
+  color: var(--text-medium);
+  text-align: center;
+}
+
+.blog-table-wrap {
+  margin: 1.25rem 0 1.5rem;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.blog-compare-table {
+  width: 100%;
+  min-width: 280px;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  border: 1px solid rgba(147, 160, 107, 0.35);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.blog-compare-table th,
+.blog-compare-table td {
+  padding: 0.65rem 0.75rem;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(147, 160, 107, 0.22);
+}
+
+.blog-compare-table thead th {
+  background: rgba(147, 160, 107, 0.12);
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.blog-compare-table tbody th[scope="row"] {
+  width: 28%;
+  max-width: 7.5rem;
+  background: rgba(250, 248, 243, 0.9);
+  font-weight: 600;
+  color: var(--text-medium);
+}
+
+.blog-compare-table tr:last-child th,
+.blog-compare-table tr:last-child td {
+  border-bottom: none;
+}
+
+.blog-prose h3 {
+  margin: 1.35rem 0 0.55rem;
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.blog-prose ol {
+  margin: 0.5rem 0 1.25rem;
+  padding-left: 1.35rem;
+  line-height: 1.8;
+}
+
+.blog-prose ol li {
+  margin-bottom: 0.45rem;
+}
+
+.blog-prose ol li:last-child {
+  margin-bottom: 0;
+}

@@ -1,7 +1,87 @@
 /* Blog listing data — edit this file when adding posts (see blog/NEW-POST.txt). */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-03-31",
+  updated: "2026-04-13",
   posts: [
+    {
+      slug: "anemia-blood-deficiency-tcm",
+      title: "贫血就是中医的血虚吗？指标与辨证的区别",
+      date: "2026-02-23",
+      excerpt:
+        "西医贫血看血红蛋白与病因；中医血虚重濡养与运行。为何不贫血仍可能血虚、有贫血未必血虚；养血健脾与何时优先现代医学。法拉盛国医堂。",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
+      slug: "liver-damaging-habits-tcm",
+      title: "伤肝的习惯，不只是喝酒：熬夜、情绪与中医眼里的「肝气失调」",
+      date: "2026-02-16",
+      excerpt:
+        "熬夜、情绪压抑、油腻饮食、久坐与过量饮酒：中医肝气失调常见诱因；信号提示与疏肝养肝血辨证；勿自行停药。法拉盛国医堂科普。",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
+      slug: "liver-tcm-gan-importance",
+      title: "中医里的「肝」有多重要？它对人的影响远超你的想象",
+      date: "2026-02-09",
+      excerpt:
+        "肝主疏泄、藏血、开窍于目：与情绪、睡眠、消化、月经、视疲劳的关系；肝气郁结与肝血不足科普；调肝须辨证，勿盲目清火进补。纽约国医堂。",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
+      slug: "tcm-western-medicine-differences",
+      title: "中药与西药有什么区别？整体调节与对症干预如何各尽其用",
+      date: "2026-01-21",
+      excerpt:
+        "整体观与机制观、辨证与标准化方案、起效节奏与适用场景；中药亦有副作用须规范使用；中西药联用须双方医师知情。纽约国医堂科普。",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
+      slug: "sleep-onset-difficulty-tcm",
+      title: "入睡困难：越想越清醒？中医从心神与节律谈起",
+      date: "2026-01-14",
+      excerpt:
+        "阳入于阴则寐：心神失养、肝郁、气血不足等分型科普；睡前降速、泡脚、神门内关按揉；针灸中药须辨证；三周以上或伴情绪问题宜就医。国医堂。",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
+      slug: "dongzhi-solar-term-wellness",
+      title: "冬至中医养生：一阳初生，顺势而养",
+      date: "2026-01-07",
+      excerpt:
+        "冬至阴极阳生与「一阳生」：藏精养阳、温补不燥；早卧晚起、护颈腰足；饮食温熟易化及阴虚者宜润；艾灸针灸中药须辨证。国医堂节气科普。",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
+      slug: "postpartum-depression-somatic-tcm",
+      title: "产后抑郁的症状，不只是情绪问题：当身体在替情绪「说话」",
+      date: "2026-01-01",
+      excerpt:
+        "产后情绪低落与失眠、心慌、乏力等躯体化表现；中医气血亏虚、肝郁与安神思路；针灸中药须辨证；何时就医及危机资源。法拉盛国医堂科普。",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
+      slug: "winter-nasal-dryness-oil-care",
+      title: "冬季鼻腔干燥，可以用水清洗吗？为什么更推荐油性制剂？",
+      date: "2025-12-21",
+      excerpt:
+        "冬季鼻干结痂易出血：为何不宜频繁清水冲掉黏膜保护；油性制剂锁水与凡士林等使用注意；加湿润肺与就医指征；纽约国医堂科普。",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
+      slug: "eye-care-chrysanthemum-tcm",
+      title: "护眼养目，从一朵菊花开始：中医视角下的日常护眼之道",
+      date: "2025-12-18",
+      excerpt:
+        "肝开窍于目：视疲劳、干涩与肝血肝火相关；菊花清肝明目及体质配伍；穴位按摩、用眼节奏与就医红线；法拉盛国医堂科普，非替代面诊。",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
+      slug: "daxue-solar-term-wellness",
+      title: "大雪节气如何养生：护阳气，固津液，藏精气",
+      date: "2025-12-06",
+      excerpt:
+        "大雪阴气盛、阳气弱，护阳保暖与艾灸要点，润燥固津的饮食建议，早睡藏精与揉耳泡脚等日常法；科普参考，体质调理请面诊。",
+      author: "guoyitang11366@gmail.com",
+    },
     {
       slug: "spring-insomnia-acupuncture",
       title: "春季失眠与针灸：法拉盛中医怎样辨证调理",
