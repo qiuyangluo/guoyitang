@@ -25,6 +25,24 @@ window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', 'G-M3EJ79RT1R');
+gtag('config', 'AW-17707030959');
+</script>
+<!-- Event snippet for 点击通话 (2) conversion -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-17707030959/PKUsCISw0Z0cEK-zr_tB',
+      'value': 1.0,
+      'currency': 'USD',
+      'event_callback': callback
+  });
+  return false;
+}
 </script>
 <!-- Vercel Web Analytics — enable in Vercel → Analytics -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
@@ -45,7 +63,7 @@ gtag('config', 'G-M3EJ79RT1R');
 <li><a href="contact-us.html">联系我们</a></li>
 </ul>
 <div class="nav-actions">
-<a class="language-btn" href="tel:+17188881133">718-888-1133</a>
+<a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_conversion('tel:+17188881133');">718-888-1133</a>
 <a class="cta-nav" href="https://www.appointmentbooking.co/book/102274571901879280048" target="_blank" rel="noopener">在线预约</a>
 </div>
 <button type="button" class="mobile-menu-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="mobileMenu">☰</button>
@@ -62,7 +80,7 @@ gtag('config', 'G-M3EJ79RT1R');
 <li><a href="contact-us.html">联系我们</a></li>
 </ul>
 <div class="mobile-actions">
-<a class="language-btn" href="tel:+17188881133">致电 718-888-1133</a>
+<a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_conversion('tel:+17188881133');">致电 718-888-1133</a>
 <a class="cta-nav" href="https://www.appointmentbooking.co/book/102274571901879280048" target="_blank" rel="noopener">在线预约</a>
 </div>
 </div>
@@ -129,8 +147,8 @@ gtag('config', 'G-M3EJ79RT1R');
 </div>
 <div class="footer-section">
 <h3>联系</h3>
-<p><a href="tel:+17188881133">(718) 888-1133</a><br>
-<a href="tel:+17188868979">(718) 886-8979</a></p>
+<p><a href="tel:+17188881133" onclick="return gtag_report_conversion('tel:+17188881133');">(718) 888-1133</a><br>
+<a href="tel:+17188868979" onclick="return gtag_report_conversion('tel:+17188868979');">(718) 886-8979</a></p>
 <p>142-38 37th Ave #1C1D<br>Flushing, NY 11354</p>
 </div>
 </div>
