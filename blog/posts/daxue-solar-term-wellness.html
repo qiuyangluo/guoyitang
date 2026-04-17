@@ -27,7 +27,7 @@ gtag('config', 'AW-17707030959');
 </script>
 <!-- Event snippet for 点击通话 (2) conversion -->
 <script>
-function gtag_report_conversion(url) {
+function gtag_report_phone_conversion(url) {
   var callback = function () {
     if (typeof(url) != 'undefined') {
       window.location = url;
@@ -37,6 +37,23 @@ function gtag_report_conversion(url) {
       'send_to': 'AW-17707030959/PKUsCISw0Z0cEK-zr_tB',
       'value': 1.0,
       'currency': 'USD',
+      'event_callback': callback
+  });
+  return false;
+}
+</script>
+
+<!-- Event snippet for 预约服务 - 跳转预约网站 conversion page
+In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
+<script>
+function gtag_report_conversion(url) {
+  var callback = function () {
+    if (typeof(url) != 'undefined') {
+      window.location = url;
+    }
+  };
+  gtag('event', 'conversion', {
+      'send_to': 'AW-17707030959/31h4CI-R5egbEK-zr_tB',
       'event_callback': callback
   });
   return false;
@@ -61,8 +78,8 @@ function gtag_report_conversion(url) {
 <li><a href="../../contact-us.html">联系我们</a></li>
 </ul>
 <div class="nav-actions">
-<a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_conversion('tel:+17188881133');">718-888-1133</a>
-<a class="cta-nav" href="https://www.appointmentbooking.co/book/102274571901879280048" target="_blank" rel="noopener">在线预约</a>
+<a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">718-888-1133</a>
+<a class="cta-nav" href="https://www.appointmentbooking.co/book/102274571901879280048" target="_blank" rel="noopener" onclick="return gtag_report_conversion('https://www.appointmentbooking.co/book/102274571901879280048');">在线预约</a>
 </div>
 <button type="button" class="mobile-menu-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="mobileMenu">☰</button>
 </div>
@@ -78,8 +95,8 @@ function gtag_report_conversion(url) {
 <li><a href="../../contact-us.html">联系我们</a></li>
 </ul>
 <div class="mobile-actions">
-<a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_conversion('tel:+17188881133');">致电 718-888-1133</a>
-<a class="cta-nav" href="https://www.appointmentbooking.co/book/102274571901879280048" target="_blank" rel="noopener">在线预约</a>
+<a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">致电 718-888-1133</a>
+<a class="cta-nav" href="https://www.appointmentbooking.co/book/102274571901879280048" target="_blank" rel="noopener" onclick="return gtag_report_conversion('https://www.appointmentbooking.co/book/102274571901879280048');">在线预约</a>
 </div>
 </div>
 </nav>
@@ -181,7 +198,7 @@ function gtag_report_conversion(url) {
 </div>
 <p class="blog-disclaimer"><strong>免责声明：</strong>本文为健康教育科普，不构成医疗建议。艾灸取穴、中药与食补因人而异，如有不适请及时就医或由执照中医师面诊。</p>
 <div class="blog-post__cta actions">
-<a class="cta-btn" href="https://www.appointmentbooking.co/book/102274571901879280048" target="_blank" rel="noopener">立即预约</a>
+<a class="cta-btn" href="https://www.appointmentbooking.co/book/102274571901879280048" target="_blank" rel="noopener" onclick="return gtag_report_conversion('https://www.appointmentbooking.co/book/102274571901879280048');">立即预约</a>
 <a class="learn-more" href="../../contact-us.html">联系我们</a>
 </div>
 </article>
@@ -210,8 +227,8 @@ function gtag_report_conversion(url) {
 </div>
 <div class="footer-section">
 <h3>联系</h3>
-<p><a href="tel:+17188881133" onclick="return gtag_report_conversion('tel:+17188881133');">(718) 888-1133</a><br>
-<a href="tel:+17188868979" onclick="return gtag_report_conversion('tel:+17188868979');">(718) 886-8979</a></p>
+<p><a href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">(718) 888-1133</a><br>
+<a href="tel:+17188868979" onclick="return gtag_report_phone_conversion('tel:+17188868979');">(718) 886-8979</a></p>
 <p>142-38 37th Ave #1C1D<br>Flushing, NY 11354</p>
 </div>
 </div>
