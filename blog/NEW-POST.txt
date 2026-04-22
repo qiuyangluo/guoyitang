@@ -1,7 +1,7 @@
 Weekly blog workflow (健康专栏)
 ================================
 
-1) Copy blog/_template.html → blog/posts/YOUR-SLUG.html
+1) Copy blog/_template.html → blog/posts/YOUR-SLUG.html（磁盘上仍为 .html 文件；线上 URL 无扩展名，如 /blog/posts/your-slug）
    - Replace SLUG in filename with a short English slug (no spaces), e.g. summer-dampness-tcm
    - Edit <title>, meta description, canonical URL, <h1>, date, body, disclaimer if needed
 
@@ -16,7 +16,7 @@ Weekly blog workflow (健康专栏)
        "excerpt": "列表页摘要，一两句话。",
        "author": "国医堂"
      }
-   - slug must match the file name: posts/your-slug.html
+   - slug must match URL 路径段与文件名：/blog/posts/your-slug ↔ posts/your-slug.html
 
 3) Deploy: blog/, assets/blog-manifest.js, assets/blog-index.js, assets/blog.css
    (optional: data/blog-manifest.json for fetch fallback)

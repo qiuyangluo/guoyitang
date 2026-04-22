@@ -54,7 +54,7 @@
     if (emptyEl) emptyEl.hidden = true;
     listEl.innerHTML = posts
       .map(function (p) {
-        var href = "posts/" + encodeURIComponent(p.slug) + ".html";
+        var href = "/blog/posts/" + encodeURIComponent(p.slug);
         return (
           '<article class="blog-card">' +
           '<time class="blog-card__time" datetime="' +
