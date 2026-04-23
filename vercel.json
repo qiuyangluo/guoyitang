@@ -1,3 +1,13 @@
 {
-  "cleanUrls": true
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.guoyitangus.com" }],
+      "destination": "https://guoyitangus.com/:path*",
+      "permanent": true
+    }
+  ]
 }

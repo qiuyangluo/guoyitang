@@ -2,6 +2,9 @@
 """
 Generate English mirror under /en from Chinese HTML sources.
 Uses Google Translate (deep-translator) with glossary pre-pass and translation cache.
+
+After regenerating HTML, run `python3 scripts/patch_nonblocking_main_css.py` so
+`main.min.css` loads via preload+onload (non–render-blocking) on all pages.
 """
 from __future__ import annotations
 
