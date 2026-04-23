@@ -266,6 +266,22 @@ p a:not([class]):hover {
   border-color: var(--green-dark);
 }
 
+.lang-switch {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--green-medium);
+  text-decoration: none;
+  padding: 0.35rem 0.65rem;
+  border-radius: var(--radius-icon-btn);
+  border: 1px solid rgba(74, 107, 56, 0.35);
+  white-space: nowrap;
+}
+
+.lang-switch:hover {
+  color: var(--green-dark);
+  border-color: var(--green-medium);
+}
+
 .cta-nav {
   min-width: var(--min-button-width);
   max-width: 100%;

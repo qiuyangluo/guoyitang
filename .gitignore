@@ -5,3 +5,4 @@ node_modules/
 # Exceeds GitHub 100MB per-file limit — keep locally or host via CDN / Git LFS
 video/clinic-intro.mp4
 .vercel
+scripts/.en_translate_cache.json
