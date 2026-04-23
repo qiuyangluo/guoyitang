@@ -36,6 +36,14 @@ GLOSSARY_POST = [
     ("Imperial Medical Hall", "Guoyitang"),
     ("Chinese medicine hall", "Guoyitang"),
     ("Chinese Medicine Hall", "Guoyitang"),
+    # 乐 → standard pinyin Yue (not Le) for English romanization
+    ("Charles Le Guixiang", "Charles Yue Guixiang"),
+    ("Le Guixiang Charles", "Yue Guixiang (Charles)"),
+    ("Dr. Charles Le Guixiang", "Dr. Charles Yue Guixiang"),
+    ("Dr. Le Guixiang", "Dr. Yue Guixiang"),
+    ("Dr. Le has", "Dr. Yue has"),
+    ("Dr. Le's", "Dr. Yue's"),
+    ("Le Guixiang", "Yue Guixiang"),
 ]
 
 CJK_RE = re.compile(r"[\u4e00-\u9fff]")
