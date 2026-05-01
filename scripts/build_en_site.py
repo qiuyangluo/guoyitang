@@ -121,6 +121,9 @@ def translate_ld_json_raw(raw: str, cache: dict) -> str:
 
 SKIP_FILES = {"reference.html", "sample7.html"}
 
+# Chinese HTML whose /en mirror is maintained by hand (do not overwrite with MT).
+SKIP_EN_TRANSLATE = frozenset({"blog/posts/tcm-yinyang-explained.html"})
+
 
 def list_source_html() -> list[Path]:
     out: list[Path] = []
@@ -360,6 +363,10 @@ def main() -> None:
     EN_ROOT.mkdir(parents=True, exist_ok=True)
     cache = load_cache()
     for src in list_source_html():
+        rel = src.relative_to(ROOT).as_posix()
+        if rel in SKIP_EN_TRANSLATE:
+            patch_zh_hreflang(src, cache)
+            continue
         process_file(src, cache)
         patch_zh_hreflang(src, cache)
     save_cache(cache)

@@ -1,7 +1,15 @@
 /* Blog listing data — edit this file when adding posts (see blog/NEW-POST.txt). */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-04-13",
+  updated: "2026-04-22",
   posts: [
+    {
+      slug: "tcm-yinyang-explained",
+      title: "中医的阴阳：动态平衡与健康入门",
+      date: "2026-04-22",
+      excerpt:
+        "阴阳是相对、互根、消长转化的整体框架；辨证与日常生活的通俗理解配合短片，不等于自行贴寒热标签。纽约国医堂健康科普。",
+      author: "guoyitang11366@gmail.com",
+    },
     {
       slug: "anemia-blood-deficiency-tcm",
       title: "贫血就是中医的血虚吗？指标与辨证的区别",

@@ -14,9 +14,9 @@
 <meta content="#354d2c" name="theme-color"/>
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
-<link rel="preload" href="assets/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
-<noscript><link rel="stylesheet" href="assets/main.min.css"></noscript>
-<link href="assets/fonts-defer.css" media="print" onload="this.media='all'" rel="stylesheet"/>
+<link as="style" href="assets/main.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
+<noscript><link href="assets/main.min.css" rel="stylesheet"/></noscript>
+<link href="assets/fonts-defer.css" media="print" onload="this.media='all'" rel="stylesheet">
 <noscript><link href="assets/fonts-defer.css" rel="stylesheet"/></noscript>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MedicalClinic","name":"国医堂中医诊所","url":"https://guoyitangus.com/contact-us","telephone":["+1-718-888-1133","+1-718-886-8979"],"address":{"@type":"PostalAddress","streetAddress":"142-38 37th Ave #1C1D","addressLocality":"Flushing","addressRegion":"NY","postalCode":"11354","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Saturday","Sunday"],"opens":"09:00","closes":"17:00"}],"areaServed":"Flushing, NY"}
@@ -66,7 +66,7 @@ function gtag_report_conversion(url) {
 <!-- Vercel Web Analytics — enable in Vercel → Analytics -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer="" src="/_vercel/insights/script.js"></script>
-</head>
+</link></head>
 <body>
 <nav aria-label="主导航" class="navbar">
 <div class="nav-container">
@@ -83,7 +83,7 @@ function gtag_report_conversion(url) {
 </ul>
 <div class="nav-actions">
 <a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">718-888-1133</a>
-<a class="lang-switch" href="/en/contact-us">English</a> <a class="cta-nav" href="https://www.appointmentbooking.co/book/102274571901879280048" onclick="return gtag_report_conversion('https://www.appointmentbooking.co/book/102274571901879280048');" rel="noopener" target="_blank">在线预约</a>
+<a class="lang-switch" href="/en/contact-us">English</a> <a class="cta-nav appt-open" href="#" rel="noopener" role="button">在线预约</a>
 </div>
 <button aria-controls="mobileMenu" aria-expanded="false" aria-label="打开菜单" class="mobile-menu-toggle" type="button">☰</button>
 </div>
@@ -100,7 +100,7 @@ function gtag_report_conversion(url) {
 </ul>
 <div class="mobile-actions">
 <a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">致电 718-888-1133</a>
-<a class="lang-switch" href="/en/contact-us">English</a> <a class="cta-nav" href="https://www.appointmentbooking.co/book/102274571901879280048" onclick="return gtag_report_conversion('https://www.appointmentbooking.co/book/102274571901879280048');" rel="noopener" target="_blank">在线预约</a>
+<a class="lang-switch" href="/en/contact-us">English</a> <a class="cta-nav appt-open" href="#" rel="noopener" role="button">在线预约</a>
 </div>
 </div>
 </nav>
@@ -110,7 +110,7 @@ function gtag_report_conversion(url) {
 <h1>联系我们</h1>
 <p class="page-lead"><strong>法拉盛针灸诊所</strong>国医堂 · <strong>Flushing</strong> 华美大楼一层。欢迎 <strong>Queens</strong> 与纽约地区患者<strong>在线预约</strong>或来电，说明症状与方便时段。</p>
 <div class="actions" style="justify-content:center;margin-top:1.25rem">
-<a class="cta-btn" href="https://www.appointmentbooking.co/book/102274571901879280048" onclick="return gtag_report_conversion('https://www.appointmentbooking.co/book/102274571901879280048');" rel="noopener" target="_blank">立即预约</a>
+<a class="cta-btn appt-open" href="#" rel="noopener" role="button">立即预约</a>
 <a class="learn-more" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">电话预约 718-888-1133</a>
 </div>
 </div>
@@ -121,7 +121,7 @@ function gtag_report_conversion(url) {
 <h2><span class="section-eyebrow">到院</span>到院信息</h2>
 <p><strong>地址：</strong>142-38 37th Ave #1C1D, Flushing, NY 11354（法拉盛华美大楼一楼）</p>
 <p><strong>电话：</strong><a href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">(718) 888-1133</a> · <a href="tel:+17188868979" onclick="return gtag_report_phone_conversion('tel:+17188868979');">(718) 886-8979</a></p>
-<p><strong>预约：</strong><a href="https://www.appointmentbooking.co/book/102274571901879280048" onclick="return gtag_report_conversion('https://www.appointmentbooking.co/book/102274571901879280048');" rel="noopener" target="_blank">在线预约系统</a></p>
+<p><strong>预约：</strong><a class="appt-open" href="#" rel="noopener" role="button">在线预约系统</a></p>
 <p><strong>地图：</strong><a href="https://maps.app.goo.gl/miXsFBWbyCsoWgY88" rel="noopener" target="_blank">Google 地图打开路线</a></p>
 </div>
 </section>
@@ -143,7 +143,7 @@ function gtag_report_conversion(url) {
 </div>
 </section>
 <div class="actions" style="margin-top:1rem">
-<a class="cta-btn" href="https://www.appointmentbooking.co/book/102274571901879280048" onclick="return gtag_report_conversion('https://www.appointmentbooking.co/book/102274571901879280048');" rel="noopener" target="_blank">立即预约</a>
+<a class="cta-btn appt-open" href="#" rel="noopener" role="button">立即预约</a>
 <a class="learn-more" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">电话预约</a>
 </div>
 </div>

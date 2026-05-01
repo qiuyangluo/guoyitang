@@ -1,7 +1,15 @@
 /* English blog listing — keep in sync with assets/blog-manifest.js slugs/dates/authors. */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-04-13",
+  updated: "2026-04-22",
   posts: [
+    {
+      slug: "tcm-yinyang-explained",
+      title: "Yin and Yang in traditional Chinese medicine: balance and a gentle primer",
+      date: "2026-04-22",
+      excerpt:
+        "Yin–Yang describe relationships and dynamic balance in TCM, not a DIY hot/cold label. Short video plus overview—education only; see a clinician for diagnosis.",
+      author: "guoyitang11366@gmail.com",
+    },
     {
       slug: "anemia-blood-deficiency-tcm",
       title: "Is anemia the same as TCM “blood deficiency”? Lab values vs. pattern differentiation",
