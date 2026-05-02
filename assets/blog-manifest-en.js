@@ -103,7 +103,7 @@ window.__BLOG_MANIFEST__ = {
       title: "Neck, shoulder, or low-back pain: when to try acupuncture—what clinics often check",
       date: "2026-03-21",
       excerpt:
-        "Qi, blood, and channel ideas; red-flag symptoms and imaging timing; combining acupuncture with bodywork and daily ergonomics. Flushing, NY reference article.",
+        "Qi, blood, and channel ideas; serious warning signs and imaging timing; combining acupuncture with bodywork and daily ergonomics. Flushing, NY reference article.",
       author: "Guoyitang",
     },
   ],

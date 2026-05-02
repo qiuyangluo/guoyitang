@@ -382,7 +382,7 @@ p a:not([class]):hover {
   justify-content: center;
   text-align: center;
   color: white;
-  padding: 5rem 1.5rem 3rem;
+  padding: 7rem 1.5rem 3rem;
   overflow: hidden;
   background-color: var(--green-deep);
   background-image:
@@ -443,6 +443,7 @@ p a:not([class]):hover {
   z-index: 3;
   max-width: 920px;
   margin: 0 auto;
+  padding-top: 1.25rem;
 }
 
 .hero-content h1 {
@@ -1744,7 +1745,11 @@ table.hours th {
 
   .hero {
     min-height: 88vh;
-    padding: 4.75rem 1.25rem 2.5rem;
+    padding: 6.25rem 1.25rem 2.5rem;
+  }
+
+  .hero-content {
+    padding-top: 0.75rem;
   }
 
   .hero-sub {
