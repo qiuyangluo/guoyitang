@@ -11,7 +11,7 @@
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect"/>
 <title>Book a visit | Guoyitang Flushing TCM</title>
-<meta content="Request a visit with your phone, preferred date and time (America/New_York), and an optional note. We add it directly to the clinic calendar. Call 718-888-1133 anytime." name="description"/>
+<meta content="Book online: phone and preferred date &amp; time. Guoyitang Flushing. Call 718-888-1133 anytime." name="description"/>
 <link href="https://guoyitangus.com/en/book" rel="canonical"/>
 <meta content="#354d2c" name="theme-color"/>
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
@@ -21,14 +21,37 @@
 <link href="/assets/fonts-defer.css" media="print" onload="this.media='all'" rel="stylesheet"/>
 <noscript><link href="/assets/fonts-defer.css" rel="stylesheet"/></noscript>
 <style>
-.book-form { display: grid; gap: 1rem; max-width: 28rem; margin-top: 1.25rem; }
+.book-layout { display: flex; flex-direction: column; align-items: center; }
+.book-layout .book-note,
+.book-layout #book-err,
+.book-layout #book-ok {
+  text-align: center;
+  max-width: 28rem;
+  width: min(100%, 28rem);
+}
+.book-layout #book-err,
+.book-layout #book-ok { margin-left: auto; margin-right: auto; }
+.book-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  width: min(100%, 28rem);
+}
 .book-form label { display: flex; flex-direction: column; gap: 0.35rem; font-weight: 600; font-size: 0.9rem; }
-.book-form input, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; }
+.book-form input, .book-form select, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; background: #fff; }
+.book-form select { cursor: pointer; }
 .book-form textarea { min-height: 4.5rem; resize: vertical; }
 .book-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 @media (max-width: 520px) { .book-form__row { grid-template-columns: 1fr; } }
-.book-form__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-top: 0.35rem; }
-.book-note { margin: 0 0 0.75rem; font-size: 0.92rem; color: var(--muted, #4a5942); max-width: 40rem; line-height: 1.55; }
+.book-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.35rem;
+}
+.book-note { margin: 0 0 0.75rem; font-size: 0.92rem; color: var(--muted, #4a5942); line-height: 1.55; }
 #book-err { color: #b42318; font-size: 0.9rem; display: none; margin-bottom: 0.75rem; }
 #book-ok { color: #1b5e20; font-weight: 600; display: none; margin-bottom: 0.75rem; }
 </style>
@@ -100,20 +123,39 @@ function gtag_report_phone_conversion(url) {
 <div class="page-hero">
 <div class="container">
 <h1>Book a visit</h1>
-<p class="page-lead">Pick a <strong>date and time</strong> in <strong>America/New_York</strong>, enter your <strong>phone</strong>, and add an optional note. A successful submit creates an event on the clinic calendar. Staff may still call to confirm.</p>
+<p class="page-lead">Enter your <strong>phone</strong> and preferred <strong>date and time</strong>. Notes are optional. We’ll note your request and <strong>call you to confirm</strong> if needed.</p>
 </div>
 </div>
 <div class="container inner-block">
 <section class="section">
-<div class="section__inner">
-<p class="book-note">Each request blocks <strong>60 minutes</strong> on the calendar. Our usual hours are Mon–Thu and Sat–Sun, 9:00 am–5:00 pm; Friday closed. For emergencies, call 911 or go to the ER.</p>
+<div class="section__inner book-layout">
+<p class="book-note">Choose a start time from the list in <strong>30-minute</strong> steps (9:00–16:00, 24-hour style). Each booking reserves <strong>60 minutes</strong>, so the latest start is <strong>16:00</strong> (ends at closing). Fri closed; Mon–Thu and Sat–Sun. Emergencies: 911 / ER.</p>
 <p id="book-err" role="alert"></p>
 <p id="book-ok" role="status"></p>
 <form class="book-form" id="book-form" novalidate="">
 <label>Phone <input autocomplete="tel" inputmode="tel" name="phone" required="" type="tel" placeholder="e.g. 718-555-0100"/></label>
 <div class="book-form__row">
 <label>Date <input name="date" required="" type="date"/></label>
-<label>Time <input name="time" required="" type="time"/></label>
+<label>Time
+<select name="time" required="">
+<option disabled="" hidden="" selected="" value="">Select a time</option>
+<option value="09:00">9:00</option>
+<option value="09:30">9:30</option>
+<option value="10:00">10:00</option>
+<option value="10:30">10:30</option>
+<option value="11:00">11:00</option>
+<option value="11:30">11:30</option>
+<option value="12:00">12:00</option>
+<option value="12:30">12:30</option>
+<option value="13:00">13:00</option>
+<option value="13:30">13:30</option>
+<option value="14:00">14:00</option>
+<option value="14:30">14:30</option>
+<option value="15:00">15:00</option>
+<option value="15:30">15:30</option>
+<option value="16:00">16:00</option>
+</select>
+</label>
 </div>
 <label>Notes (optional) <textarea name="notes" placeholder="Main concern, language preference, etc."></textarea></label>
 <div class="book-form__actions">
@@ -208,8 +250,8 @@ function gtag_report_phone_conversion(url) {
       showErr("Please enter your phone number.");
       return;
     }
-    if (!dateStr || !timeStr) {
-      showErr("Please choose a date and time.");
+    if (!dateStr || !timeStr || timeStr === "") {
+      showErr("Please choose a date and time slot.");
       return;
     }
 

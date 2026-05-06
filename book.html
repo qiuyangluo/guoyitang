@@ -10,8 +10,8 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect"/>
-<title>在线预约｜写入诊所日历｜国医堂法拉盛</title>
-<meta content="填写电话、希望到诊日期与时间（纽约时间），可选备注；提交后直接写入国医堂诊所 Google 日历。亦可致电 718-888-1133。" name="description"/>
+<title>在线预约｜国医堂法拉盛</title>
+<meta content="在线预约：填写电话与方便到诊的日期与时间。法拉盛国医堂，亦可致电 718-888-1133。" name="description"/>
 <link href="https://guoyitangus.com/book" rel="canonical"/>
 <meta content="#354d2c" name="theme-color"/>
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
@@ -21,14 +21,37 @@
 <link href="assets/fonts-defer.css" media="print" onload="this.media='all'" rel="stylesheet"/>
 <noscript><link href="assets/fonts-defer.css" rel="stylesheet"/></noscript>
 <style>
-.book-form { display: grid; gap: 1rem; max-width: 28rem; margin-top: 1.25rem; }
+.book-layout { display: flex; flex-direction: column; align-items: center; }
+.book-layout .book-note,
+.book-layout #book-err,
+.book-layout #book-ok {
+  text-align: center;
+  max-width: 28rem;
+  width: min(100%, 28rem);
+}
+.book-layout #book-err,
+.book-layout #book-ok { margin-left: auto; margin-right: auto; }
+.book-form {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.25rem;
+  width: min(100%, 28rem);
+}
 .book-form label { display: flex; flex-direction: column; gap: 0.35rem; font-weight: 600; font-size: 0.9rem; }
-.book-form input, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; }
+.book-form input, .book-form select, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; background: #fff; }
+.book-form select { cursor: pointer; }
 .book-form textarea { min-height: 4.5rem; resize: vertical; }
 .book-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
 @media (max-width: 520px) { .book-form__row { grid-template-columns: 1fr; } }
-.book-form__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; align-items: center; margin-top: 0.35rem; }
-.book-note { margin: 0 0 0.75rem; font-size: 0.92rem; color: var(--muted, #4a5942); max-width: 40rem; line-height: 1.55; }
+.book-form__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0.35rem;
+}
+.book-note { margin: 0 0 0.75rem; font-size: 0.92rem; color: var(--muted, #4a5942); line-height: 1.55; }
 #book-err { color: #b42318; font-size: 0.9rem; display: none; margin-bottom: 0.75rem; }
 #book-ok { color: #1b5e20; font-weight: 600; display: none; margin-bottom: 0.75rem; }
 </style>
@@ -100,20 +123,39 @@ function gtag_report_phone_conversion(url) {
 <div class="page-hero">
 <div class="container">
 <h1>在线预约</h1>
-<p class="page-lead">请选择<strong>希望到诊的日期与时间</strong>（纽约时间 · America/New_York），留下电话与可选备注；提交成功后将<strong>直接写入</strong>诊所工作日历。时段仅供预约参考，前台或医师可能与您电话确认。</p>
+<p class="page-lead">请填写<strong>电话</strong>与您<strong>方便的日期与时间</strong>；可选用备注说明需求。提交后诊所会记下您的意向，<strong>有需要时会来电与您确认</strong>。</p>
 </div>
 </div>
 <div class="container inner-block">
 <section class="section">
-<div class="section__inner">
-<p class="book-note">预约时段按<strong>60 分钟</strong>块状写入日历。周五休息；其他营业日 9:00–17:00，请在此范围内选择。紧急情况请先拨打 911 或赴急诊。</p>
+<div class="section__inner book-layout">
+<p class="book-note">时间以下拉任选，每<strong>30 分钟</strong>一档（9:00–16:00）；提交后日历中占用<strong>60 分钟</strong>，故最晚可选<strong>16:00</strong>开始。周五休诊；其他营业日请在上述时段内选择。紧急情况请先拨打 911 或赴急诊。</p>
 <p id="book-err" role="alert"></p>
 <p id="book-ok" role="status"></p>
 <form class="book-form" id="book-form" novalidate="">
 <label>手机号码 <input autocomplete="tel" inputmode="tel" name="phone" required="" type="tel" placeholder="例：718-555-0100"/></label>
 <div class="book-form__row">
 <label>日期 <input name="date" required="" type="date"/></label>
-<label>时间 <input name="time" required="" type="time"/></label>
+<label>时间
+<select name="time" required="">
+<option disabled="" hidden="" selected="" value="">请选择时间</option>
+<option value="09:00">9:00</option>
+<option value="09:30">9:30</option>
+<option value="10:00">10:00</option>
+<option value="10:30">10:30</option>
+<option value="11:00">11:00</option>
+<option value="11:30">11:30</option>
+<option value="12:00">12:00</option>
+<option value="12:30">12:30</option>
+<option value="13:00">13:00</option>
+<option value="13:30">13:30</option>
+<option value="14:00">14:00</option>
+<option value="14:30">14:30</option>
+<option value="15:00">15:00</option>
+<option value="15:30">15:30</option>
+<option value="16:00">16:00</option>
+</select>
+</label>
 </div>
 <label>备注（选填） <textarea name="notes" placeholder="主要症状、希望使用的语言等"></textarea></label>
 <div class="book-form__actions">
@@ -208,8 +250,8 @@ function gtag_report_phone_conversion(url) {
       showErr("请填写手机号码。");
       return;
     }
-    if (!dateStr || !timeStr) {
-      showErr("请选择日期与时间。");
+    if (!dateStr || !timeStr || timeStr === "") {
+      showErr("请选择日期与时间段。");
       return;
     }
 
