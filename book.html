@@ -316,15 +316,6 @@ function gtag_report_phone_conversion(url) {
         var line =
           "已写入诊所日历。请留意电话确认；如遇系统错误可来电 718-888-1133。";
         showOk(line);
-        if (j.htmlLink) {
-          okEl.appendChild(document.createTextNode(" "));
-          var a = document.createElement("a");
-          a.href = j.htmlLink;
-          a.rel = "noopener noreferrer";
-          a.target = "_blank";
-          a.textContent = "查看日历条目";
-          okEl.appendChild(a);
-        }
         form.reset();
         return;
       }

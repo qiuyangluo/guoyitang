@@ -318,15 +318,6 @@ function gtag_report_phone_conversion(url) {
         showOk(
           "Added to the clinic calendar. We may call to confirm. Questions? 718-888-1133."
         );
-        if (j.htmlLink) {
-          okEl.appendChild(document.createTextNode(" "));
-          var a = document.createElement("a");
-          a.href = j.htmlLink;
-          a.rel = "noopener noreferrer";
-          a.target = "_blank";
-          a.textContent = "Open in Google Calendar";
-          okEl.appendChild(a);
-        }
         form.reset();
         return;
       }
