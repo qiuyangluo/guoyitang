@@ -129,7 +129,7 @@ function gtag_report_phone_conversion(url) {
 <div class="container inner-block">
 <section class="section">
 <div class="section__inner book-layout">
-<p class="book-note">Closed Fridays. Emergencies: call 911 or go to the ER.</p>
+<p class="book-note">Hours: <strong>Mon–Thu &amp; Sat–Sun</strong>, 9:00 am–5:00 pm. <strong>Closed Fridays.</strong> Emergencies: call 911 or go to the ER.</p>
 <p id="book-err" role="alert"></p>
 <p id="book-ok" role="status"></p>
 <form class="book-form" id="book-form" novalidate="">
@@ -235,6 +235,25 @@ function gtag_report_phone_conversion(url) {
     );
   }
 
+  function isFridayYmd(y, m, d) {
+    return new Date(y, m - 1, d, 12, 0, 0).getDay() === 5;
+  }
+
+  var dateInput = form.querySelector('input[name="date"]');
+  if (dateInput) {
+    dateInput.addEventListener("change", function () {
+      showErr("");
+      var v = dateInput.value;
+      if (!v) return;
+      var p = v.split("-").map(Number);
+      if (p.length < 3) return;
+      if (isFridayYmd(p[0], p[1], p[2])) {
+        showErr("We're closed Fridays — please pick another day.");
+        dateInput.value = "";
+      }
+    });
+  }
+
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     showErr("");
@@ -261,6 +280,13 @@ function gtag_report_phone_conversion(url) {
       showErr("Invalid date or time.");
       return;
     }
+    if (isFridayYmd(dp[0], dp[1], dp[2])) {
+      showErr(
+        "We're closed Fridays. Please choose Monday–Thursday, Saturday, or Sunday."
+      );
+      return;
+    }
+
     var start = new Date(dp[0], dp[1] - 1, dp[2], tp[0], tp[1] || 0, 0);
     if (isNaN(start.getTime())) {
       showErr("Could not read the selected date and time.");

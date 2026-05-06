@@ -129,7 +129,7 @@ function gtag_report_phone_conversion(url) {
 <div class="container inner-block">
 <section class="section">
 <div class="section__inner book-layout">
-<p class="book-note">周五休诊。急症请先拨打 911 或赴急诊。</p>
+<p class="book-note">营业时间：<strong>周一至周四、周六、周日</strong> 9:00–17:00；<strong>周五休息</strong>。急症请先拨打 911 或赴急诊。</p>
 <p id="book-err" role="alert"></p>
 <p id="book-ok" role="status"></p>
 <form class="book-form" id="book-form" novalidate="">
@@ -235,6 +235,25 @@ function gtag_report_phone_conversion(url) {
     );
   }
 
+  function isFridayYmd(y, m, d) {
+    return new Date(y, m - 1, d, 12, 0, 0).getDay() === 5;
+  }
+
+  var dateInput = form.querySelector('input[name="date"]');
+  if (dateInput) {
+    dateInput.addEventListener("change", function () {
+      showErr("");
+      var v = dateInput.value;
+      if (!v) return;
+      var p = v.split("-").map(Number);
+      if (p.length < 3) return;
+      if (isFridayYmd(p[0], p[1], p[2])) {
+        showErr("诊所周五休诊，请另选日期。");
+        dateInput.value = "";
+      }
+    });
+  }
+
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     showErr("");
@@ -261,6 +280,11 @@ function gtag_report_phone_conversion(url) {
       showErr("日期或时间格式无效。");
       return;
     }
+    if (isFridayYmd(dp[0], dp[1], dp[2])) {
+      showErr("诊所周五休诊，请选择周一至周四、周六或周日。");
+      return;
+    }
+
     var start = new Date(dp[0], dp[1] - 1, dp[2], tp[0], tp[1] || 0, 0);
     if (isNaN(start.getTime())) {
       showErr("无法解析所选日期时间。");

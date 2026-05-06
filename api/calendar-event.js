@@ -99,6 +99,11 @@ function trimStr(v, max) {
   return max ? s.slice(0, max) : s;
 }
 
+/** Gregorian weekday 0=Sun … 5=Fri for calendar Y-M-D (UTC noon, unambiguous). */
+function calendarWeekdayFri(y, m, d) {
+  return new Date(Date.UTC(y, m - 1, d, 12, 0, 0)).getUTCDay() === 5;
+}
+
 module.exports = async (req, res) => {
   corsHeaders(req, res);
   if (req.method === "OPTIONS") return res.status(204).end();
@@ -155,6 +160,23 @@ module.exports = async (req, res) => {
     return res.status(400).json({ error: "Invalid start or end datetime" });
   if (endD <= startD)
     return res.status(400).json({ error: "End must be after start" });
+
+  const dm = /^(\d{4})-(\d{2})-(\d{2})T/.exec(start);
+  if (dm) {
+    const y = parseInt(dm[1], 10);
+    const mo = parseInt(dm[2], 10);
+    const da = parseInt(dm[3], 10);
+    if (
+      y > 0 &&
+      mo >= 1 &&
+      mo <= 12 &&
+      da >= 1 &&
+      da <= 31 &&
+      calendarWeekdayFri(y, mo, da)
+    ) {
+      return res.status(400).json({ error: "Clinic is closed on Fridays" });
+    }
+  }
 
   const lines = [`联系人：${contactName}`, `电话：${contactPhone}`];
   if (contactEmail) lines.push(`邮箱：${contactEmail}`);
