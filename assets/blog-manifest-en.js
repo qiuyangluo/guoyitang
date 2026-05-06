@@ -1,7 +1,16 @@
 /* English blog listing — keep in sync with assets/blog-manifest.js slugs/dates/authors. */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-04-22",
+  updated: "2026-05-05",
   posts: [
+    {
+      slug: "lixia-solar-term-wellness",
+      title:
+        "Lixia (Beginning of Summer) wellness: calm heart-fire, support Yang, fortify the Spleen, ease dampness",
+      date: "2026-05-05",
+      excerpt:
+        "Early summer stirs Heart Qi and damp-heat tendencies; gentle clearing, Spleen-friendly meals, midday rest, and light sweating. When to seek pattern-based TCM care. Education only—Guoyitang Flushing.",
+      author: "guoyitang11366@gmail.com",
+    },
     {
       slug: "tcm-yinyang-explained",
       title: "Yin and Yang in traditional Chinese medicine: balance and a gentle primer",

@@ -122,7 +122,12 @@ def translate_ld_json_raw(raw: str, cache: dict) -> str:
 SKIP_FILES = {"reference.html", "sample7.html"}
 
 # Chinese HTML whose /en mirror is maintained by hand (do not overwrite with MT).
-SKIP_EN_TRANSLATE = frozenset({"blog/posts/tcm-yinyang-explained.html"})
+SKIP_EN_TRANSLATE = frozenset(
+    {
+        "blog/posts/tcm-yinyang-explained.html",
+        "blog/posts/lixia-solar-term-wellness.html",
+    }
+)
 
 
 def list_source_html() -> list[Path]:
