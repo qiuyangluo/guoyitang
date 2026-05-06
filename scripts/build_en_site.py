@@ -124,6 +124,7 @@ SKIP_FILES = {"reference.html", "sample7.html"}
 # Chinese HTML whose /en mirror is maintained by hand (do not overwrite with MT).
 SKIP_EN_TRANSLATE = frozenset(
     {
+        "book.html",
         "blog/posts/tcm-yinyang-explained.html",
         "blog/posts/lixia-solar-term-wellness.html",
     }

@@ -4,6 +4,16 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/calendar-event-helper",
+      "destination": "/book",
+      "permanent": true
+    },
+    {
+      "source": "/en/calendar-event-helper",
+      "destination": "/en/book",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [{ "type": "host", "value": "www.guoyitangus.com" }],
       "destination": "https://guoyitangus.com/:path*",

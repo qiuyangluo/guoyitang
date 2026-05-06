@@ -131,19 +131,23 @@ module.exports = async (req, res) => {
   if (!creds)
     return res.status(503).json({ error: "Calendar booking is not configured" });
 
-  const summary = trimStr(body.summary, 500);
+  const summaryProvided = trimStr(body.summary, 500);
   const start = trimStr(body.start);
   const end = trimStr(body.end);
   const timeZone = trimStr(body.timeZone) || "America/New_York";
-  const contactName = trimStr(body.contactName, 200);
+  const contactNameProvided = trimStr(body.contactName, 200);
   const contactPhone = trimStr(body.contactPhone, 80);
   const contactEmail = trimStr(body.contactEmail, 200);
   const notes = trimStr(body.notes, 4000);
 
-  if (!summary || !start || !end)
-    return res.status(400).json({ error: "Missing summary, start, or end" });
-  if (!contactName || !contactPhone)
-    return res.status(400).json({ error: "Missing contact name or phone" });
+  if (!start || !end)
+    return res.status(400).json({ error: "Missing start or end" });
+  if (!contactPhone)
+    return res.status(400).json({ error: "Missing contact phone" });
+  const contactName =
+    contactNameProvided || "Website form";
+  const summary =
+    summaryProvided || `Guoyitang · ${contactPhone}`;
 
   const startD = new Date(start);
   const endD = new Date(end);
@@ -155,7 +159,7 @@ module.exports = async (req, res) => {
   const lines = [`联系人：${contactName}`, `电话：${contactPhone}`];
   if (contactEmail) lines.push(`邮箱：${contactEmail}`);
   if (notes) lines.push(`备注：${notes}`);
-  lines.push("", "Submitted via guoyitangus.com calendar helper");
+  lines.push("", "Submitted via guoyitangus.com");
 
   const description = lines.join("\n");
   const location = trimStr(body.location, 500) || DEFAULT_LOCATION;

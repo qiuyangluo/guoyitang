@@ -6,8 +6,7 @@ import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-BOOKING = "https://www.appointmentbooking.co/book/102274571901879280048"
-BOOKING_ON = f'onclick="return gtag_report_conversion(\'{BOOKING}\');"'
+BOOKING = "/book"
 
 
 def shell() -> str:
@@ -72,7 +71,7 @@ function gtag_report_conversion(url) {
 </ul>
 <div class="nav-actions">
 <a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">718-888-1133</a>
-<a class="cta-nav" href="$BOOKING" target="_blank" rel="noopener" $BOOKING_ON>在线预约</a>
+<a class="cta-nav" href="$BOOKING">在线预约</a>
 </div>
 <button type="button" class="mobile-menu-toggle" aria-label="打开菜单" aria-expanded="false" aria-controls="mobileMenu">☰</button>
 </div>
@@ -89,7 +88,7 @@ function gtag_report_conversion(url) {
 </ul>
 <div class="mobile-actions">
 <a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">致电 718-888-1133</a>
-<a class="cta-nav" href="$BOOKING" target="_blank" rel="noopener" $BOOKING_ON>在线预约</a>
+<a class="cta-nav" href="$BOOKING">在线预约</a>
 </div>
 </div>
 </nav>
@@ -100,7 +99,7 @@ function gtag_report_conversion(url) {
 <h1>$H1</h1>
 <p class="page-lead">$LEAD</p>
 <div class="actions" style="justify-content:center;margin-top:1.25rem">
-<a class="cta-btn" href="$BOOKING" target="_blank" rel="noopener" $BOOKING_ON>立即预约</a>
+<a class="cta-btn" href="$BOOKING">立即预约</a>
 <a class="learn-more" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">电话预约</a>
 </div>
 </div>
@@ -213,7 +212,6 @@ def build_page(
     rest = (
         shell()
         .replace("$BOOKING", BOOKING)
-        .replace("$BOOKING_ON", BOOKING_ON)
         .replace("$H1", h1)
         .replace("$LEAD", lead)
         .replace("$BODY", body)
