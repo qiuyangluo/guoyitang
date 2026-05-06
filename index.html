@@ -7,6 +7,8 @@
 <link href="https://cdn.jsdelivr.net" rel="dns-prefetch"/>
 <link href="https://fonts.googleapis.com" rel="dns-prefetch"/>
 <link href="https://fonts.gstatic.com" rel="dns-prefetch"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link crossorigin="" href="https://cdn.jsdelivr.net" rel="preconnect"/>
 <title>国医堂｜法拉盛针灸中医诊所｜纽约中医推荐｜法拉盛中医针灸｜Guoyitang</title>
 <meta content="国医堂位于法拉盛华美大楼一层，针灸、中药与推拿协同运用，辨证论治。门诊侧重颈肩腰背疼痛、失眠与脾胃失调等的缓解与调理，并开展妇科月经病、备孕及体质调养。纽约州执照针灸师主理，接受多种医疗保险。718-888-1133。" name="description"/>
 <meta content="国医堂,法拉盛针灸,法拉盛中医推荐,法拉盛中医,法拉盛中医针灸,腰痛拔罐,纽约中医推荐,纽约妇科调理中医,纽约中药调理体质,法拉盛针灸中医诊所,法拉盛中医诊所,法拉盛针灸诊所,纽约中医,失眠针灸,腰痛针灸,颈椎病针灸,中医调理,中医治疗,中医妇科,中医男科,中医泌尿科,中医减肥,Flushing 中医,Queens 中医,纽约国医堂,推拿艾灸,拔罐,华美大楼" name="keywords"/>
@@ -18,7 +20,8 @@
 <meta content="https://guoyitangus.com/image/hero.png" property="og:image"/>
 <meta content="zh_CN" property="og:locale"/>
 <meta content="#354d2c" name="theme-color"/>
-<link as="image" href="image/hero.webp" rel="preload" type="image/webp"/>
+<link fetchpriority="high" as="image" href="image/hero-768.webp" media="(max-width: 768px)" rel="preload" type="image/webp"/>
+<link fetchpriority="high" as="image" href="image/hero.webp" media="(min-width: 769px)" rel="preload" type="image/webp"/>
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
 <link rel="preload" href="assets/main.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"/>
@@ -28,7 +31,7 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"MedicalClinic","name":"国医堂中医诊所 Guoyitang TCM Clinic","alternateName":["国医堂","法拉盛针灸中医诊所","法拉盛国医堂","法拉盛针灸诊所","法拉盛中医诊所","Flushing Guoyitang","纽约国医堂"],"description":"纽约法拉盛华美大楼一层的中医诊所，开展针灸、中药、推拿及拔罐等；擅长痛症、失眠与消化功能紊乱、妇科月经病与备孕调理、男科及泌尿功能失调等的辨证诊疗，具体方案须面诊评估。服务皇后区及纽约华人社区。","image":"https://guoyitangus.com/image/hero.png","url":"https://guoyitangus.com/","telephone":["+1-718-888-1133","+1-718-886-8979"],"address":{"@type":"PostalAddress","streetAddress":"142-38 37th Ave #1C1D","addressLocality":"Flushing","addressRegion":"NY","postalCode":"11354","addressCountry":"US"},"openingHoursSpecification":[{"@type":"OpeningHoursSpecification","dayOfWeek":["Monday","Tuesday","Wednesday","Thursday","Saturday","Sunday"],"opens":"09:00","closes":"17:00"}],"areaServed":[{"@type":"City","name":"Flushing, New York"},{"@type":"City","name":"Queens, New York"}],"medicalSpecialty":["TraditionalChineseMedicine","Acupuncture"],"knowsAbout":["法拉盛针灸","法拉盛中医","法拉盛中医针灸","纽约中医","妇科调经","中药体质调理","腰痛","拔罐","针灸"]}
 </script>
-<!-- Google tag (gtag.js) -->
+<!-- Google tag — keep in head so nav onclick conversions are defined (async script does not block parsing) -->
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M3EJ79RT1R"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
@@ -37,7 +40,6 @@ gtag('js', new Date());
 gtag('config', 'G-M3EJ79RT1R');
 gtag('config', 'AW-17707030959');
 </script>
-<!-- Event snippet for 点击通话 (2) conversion -->
 <script>
 function gtag_report_phone_conversion(url) {
   var callback = function () {
@@ -53,10 +55,6 @@ function gtag_report_phone_conversion(url) {
   });
   return false;
 }
-</script>
-<!-- Event snippet for 预约服务 - 跳转预约网站 conversion page
-In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
-<script>
 function gtag_report_conversion(url) {
   var callback = function () {
     if (typeof(url) != 'undefined') {
@@ -70,14 +68,13 @@ function gtag_report_conversion(url) {
   return false;
 }
 </script>
-<!-- Vercel Web Analytics (equivalent to @vercel/analytics/next Analytics component; enable in Vercel → Analytics) -->
 <script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments);};</script>
 <script defer="" src="/_vercel/insights/script.js"></script>
 </head>
 <body>
 <nav aria-label="主导航" class="navbar">
 <div class="nav-container">
-<a class="logo" href="/"><img alt="国医堂中医诊所标志（Guoyitang TCM）" height="42" src="image/guoyitang-logo-header-125x42.webp" width="125"/></a>
+<a class="logo" href="/"><img alt="国医堂中医诊所标志（Guoyitang TCM）" fetchpriority="low" height="42" src="image/guoyitang-logo-header-125x42.webp" width="125"/></a>
 <ul class="nav-links">
 <li><a aria-current="page" href="/">主页</a></li>
 <li><a href="/about-us">关于我们</a></li>
@@ -114,8 +111,8 @@ function gtag_report_conversion(url) {
 <main id="main-content">
 <section aria-label="诊所介绍" class="hero">
 <picture aria-hidden="true" class="hero__bg">
-<source srcset="image/hero.webp" type="image/webp"/>
-<img alt="" decoding="async" fetchpriority="high" height="1066" sizes="100vw" src="image/hero.png" width="1600"/>
+<source srcset="image/hero-768.webp 768w, image/hero-1200.webp 1200w, image/hero.webp 1600w" sizes="100vw" type="image/webp"/>
+<img alt="" decoding="sync" fetchpriority="high" height="1066" sizes="100vw" src="image/hero.png" srcset="image/hero-768.png 768w, image/hero.png 1600w" width="1600"/>
 </picture>
 <div class="hero-content">
 <h1>法拉盛针灸中医诊所｜纽约国医堂</h1>
