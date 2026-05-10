@@ -141,18 +141,18 @@ module.exports = async (req, res) => {
   const end = trimStr(body.end);
   const timeZone = trimStr(body.timeZone) || "America/New_York";
   const contactNameProvided = trimStr(body.contactName, 200);
-  const contactPhone = trimStr(body.contactPhone, 80);
+  const contactPhoneRaw = trimStr(body.contactPhone, 80);
+  const contactPhone = contactPhoneRaw || "—";
   const contactEmail = trimStr(body.contactEmail, 200);
   const notes = trimStr(body.notes, 4000);
 
   if (!start || !end)
     return res.status(400).json({ error: "Missing start or end" });
-  if (!contactPhone)
-    return res.status(400).json({ error: "Missing contact phone" });
   const contactName =
     contactNameProvided || "Website form";
   const summary =
-    summaryProvided || `Guoyitang · ${contactPhone}`;
+    summaryProvided ||
+    (contactPhoneRaw ? `Guoyitang · ${contactPhoneRaw}` : "Guoyitang · booking");
 
   const startD = new Date(start);
   const endD = new Date(end);

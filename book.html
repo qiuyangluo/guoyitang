@@ -41,8 +41,34 @@
 .book-form input, .book-form select, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; background: #fff; }
 .book-form select { cursor: pointer; }
 .book-form textarea { min-height: 4.5rem; resize: vertical; }
-.book-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-@media (max-width: 520px) { .book-form__row { grid-template-columns: 1fr; } }
+.book-form__datetime { display: flex; flex-direction: column; gap: 0.65rem; }
+.book-time { margin-top: 0.15rem; }
+.book-time__label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; }
+.book-time-slots { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.book-time-slot {
+  margin: 0;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgba(53, 77, 44, 0.4);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  background: #fff;
+  color: var(--ink, #1f2a17);
+  cursor: pointer;
+  line-height: 1.2;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.book-time-slot:hover { border-color: rgba(53, 77, 44, 0.65); background: rgba(53, 77, 44, 0.06); }
+.book-time-slot:focus-visible {
+  outline: 2px solid var(--accent-green, #4a7c3a);
+  outline-offset: 2px;
+}
+.book-time-slot.is-selected {
+  background: rgba(53, 77, 44, 0.12);
+  border-color: rgba(53, 77, 44, 0.75);
+  box-shadow: inset 0 0 0 1px rgba(53, 77, 44, 0.15);
+}
 .book-form__actions {
   display: flex;
   flex-wrap: wrap;
@@ -123,7 +149,7 @@ function gtag_report_phone_conversion(url) {
 <div class="page-hero">
 <div class="container">
 <h1>在线预约</h1>
-<p class="page-lead">请填写<strong>电话</strong>与您<strong>方便的日期与时间</strong>；可选用备注说明需求。提交后诊所会记下您的意向，<strong>有需要时会来电与您确认</strong>。</p>
+<p class="page-lead">请先选择<strong>日期</strong>与<strong>时段</strong>；手机号与备注为选填。提交后诊所会记下您的意向，<strong>有需要时会来电与您确认</strong>。</p>
 </div>
 </div>
 <div class="container inner-block">
@@ -133,30 +159,31 @@ function gtag_report_phone_conversion(url) {
 <p id="book-err" role="alert"></p>
 <p id="book-ok" role="status"></p>
 <form class="book-form" id="book-form" novalidate="">
-<label>手机号码 <input autocomplete="tel" inputmode="tel" name="phone" required="" type="tel" placeholder="例：718-555-0100"/></label>
-<div class="book-form__row">
+<div class="book-form__datetime">
 <label>日期 <input name="date" required="" type="date"/></label>
-<label>时间
-<select name="time" required="">
-<option disabled="" hidden="" selected="" value="">请选择时间</option>
-<option value="09:00">9:00</option>
-<option value="09:30">9:30</option>
-<option value="10:00">10:00</option>
-<option value="10:30">10:30</option>
-<option value="11:00">11:00</option>
-<option value="11:30">11:30</option>
-<option value="12:00">12:00</option>
-<option value="12:30">12:30</option>
-<option value="13:00">13:00</option>
-<option value="13:30">13:30</option>
-<option value="14:00">14:00</option>
-<option value="14:30">14:30</option>
-<option value="15:00">15:00</option>
-<option value="15:30">15:30</option>
-<option value="16:00">16:00</option>
-</select>
-</label>
+<input name="time" type="hidden" value=""/>
+<div class="book-time" role="group" aria-label="选择时间">
+<span class="book-time__label" id="book-time-heading">时间</span>
+<div aria-labelledby="book-time-heading" class="book-time-slots">
+<button class="book-time-slot" data-time="09:00" type="button">9:00</button>
+<button class="book-time-slot" data-time="09:30" type="button">9:30</button>
+<button class="book-time-slot" data-time="10:00" type="button">10:00</button>
+<button class="book-time-slot" data-time="10:30" type="button">10:30</button>
+<button class="book-time-slot" data-time="11:00" type="button">11:00</button>
+<button class="book-time-slot" data-time="11:30" type="button">11:30</button>
+<button class="book-time-slot" data-time="12:00" type="button">12:00</button>
+<button class="book-time-slot" data-time="12:30" type="button">12:30</button>
+<button class="book-time-slot" data-time="13:00" type="button">13:00</button>
+<button class="book-time-slot" data-time="13:30" type="button">13:30</button>
+<button class="book-time-slot" data-time="14:00" type="button">14:00</button>
+<button class="book-time-slot" data-time="14:30" type="button">14:30</button>
+<button class="book-time-slot" data-time="15:00" type="button">15:00</button>
+<button class="book-time-slot" data-time="15:30" type="button">15:30</button>
+<button class="book-time-slot" data-time="16:00" type="button">16:00</button>
 </div>
+</div>
+</div>
+<label>手机号码（选填） <input autocomplete="tel" inputmode="tel" name="phone" type="tel" placeholder="例：718-555-0100"/></label>
 <label>备注（选填） <textarea name="notes" placeholder="主要症状、希望使用的语言等"></textarea></label>
 <div class="book-form__actions">
 <button class="cta-btn" type="submit">提交预约</button>
@@ -239,6 +266,29 @@ function gtag_report_phone_conversion(url) {
     return new Date(y, m - 1, d, 12, 0, 0).getDay() === 5;
   }
 
+  var timeHidden = form.querySelector('input[name="time"]');
+  var timeButtons = form.querySelectorAll(".book-time-slot");
+
+  function setSelectedTime(value) {
+    if (timeHidden) timeHidden.value = value || "";
+    timeButtons.forEach(function (btn) {
+      var t = btn.getAttribute("data-time") || "";
+      var on = value && t === value;
+      btn.classList.toggle("is-selected", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
+  timeButtons.forEach(function (btn) {
+    btn.setAttribute("aria-pressed", "false");
+    btn.addEventListener("click", function () {
+      var t = btn.getAttribute("data-time");
+      if (!t) return;
+      setSelectedTime(t);
+      showErr("");
+    });
+  });
+
   var dateInput = form.querySelector('input[name="date"]');
   if (dateInput) {
     dateInput.addEventListener("change", function () {
@@ -254,6 +304,10 @@ function gtag_report_phone_conversion(url) {
     });
   }
 
+  form.addEventListener("reset", function () {
+    setSelectedTime("");
+  });
+
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     showErr("");
@@ -265,10 +319,6 @@ function gtag_report_phone_conversion(url) {
     var timeStr = fd.get("time") || "";
     var notes = String(fd.get("notes") || "").trim();
 
-    if (!phone) {
-      showErr("请填写手机号码。");
-      return;
-    }
     if (!dateStr || !timeStr || timeStr === "") {
       showErr("请选择日期与时间段。");
       return;
@@ -293,7 +343,7 @@ function gtag_report_phone_conversion(url) {
     var end = new Date(start.getTime() + SLOT_MS);
 
     var payload = {
-      summary: "国医堂预约 · " + phone,
+      summary: phone ? "国医堂预约 · " + phone : "国医堂预约",
       start: fmtLocal(start),
       end: fmtLocal(end),
       timeZone: TZ_LABEL,
@@ -317,6 +367,7 @@ function gtag_report_phone_conversion(url) {
           "已写入诊所日历。请留意电话确认；如遇系统错误可来电 718-888-1133。";
         showOk(line);
         form.reset();
+        setSelectedTime("");
         return;
       }
 

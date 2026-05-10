@@ -41,8 +41,34 @@
 .book-form input, .book-form select, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; background: #fff; }
 .book-form select { cursor: pointer; }
 .book-form textarea { min-height: 4.5rem; resize: vertical; }
-.book-form__row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
-@media (max-width: 520px) { .book-form__row { grid-template-columns: 1fr; } }
+.book-form__datetime { display: flex; flex-direction: column; gap: 0.65rem; }
+.book-time { margin-top: 0.15rem; }
+.book-time__label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; }
+.book-time-slots { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+.book-time-slot {
+  margin: 0;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid rgba(53, 77, 44, 0.4);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  background: #fff;
+  color: var(--ink, #1f2a17);
+  cursor: pointer;
+  line-height: 1.2;
+  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.book-time-slot:hover { border-color: rgba(53, 77, 44, 0.65); background: rgba(53, 77, 44, 0.06); }
+.book-time-slot:focus-visible {
+  outline: 2px solid var(--accent-green, #4a7c3a);
+  outline-offset: 2px;
+}
+.book-time-slot.is-selected {
+  background: rgba(53, 77, 44, 0.12);
+  border-color: rgba(53, 77, 44, 0.75);
+  box-shadow: inset 0 0 0 1px rgba(53, 77, 44, 0.15);
+}
 .book-form__actions {
   display: flex;
   flex-wrap: wrap;
@@ -123,7 +149,7 @@ function gtag_report_phone_conversion(url) {
 <div class="page-hero">
 <div class="container">
 <h1>Book a visit</h1>
-<p class="page-lead">Enter your <strong>phone</strong> and preferred <strong>date and time</strong>. Notes are optional. We’ll note your request and <strong>call you to confirm</strong> if needed.</p>
+<p class="page-lead">Pick a <strong>date</strong> and <strong>time slot</strong> first. Phone and notes are optional. We’ll note your request and <strong>call you to confirm</strong> if needed.</p>
 </div>
 </div>
 <div class="container inner-block">
@@ -133,30 +159,31 @@ function gtag_report_phone_conversion(url) {
 <p id="book-err" role="alert"></p>
 <p id="book-ok" role="status"></p>
 <form class="book-form" id="book-form" novalidate="">
-<label>Phone <input autocomplete="tel" inputmode="tel" name="phone" required="" type="tel" placeholder="e.g. 718-555-0100"/></label>
-<div class="book-form__row">
+<div class="book-form__datetime">
 <label>Date <input name="date" required="" type="date"/></label>
-<label>Time
-<select name="time" required="">
-<option disabled="" hidden="" selected="" value="">Select a time</option>
-<option value="09:00">9:00</option>
-<option value="09:30">9:30</option>
-<option value="10:00">10:00</option>
-<option value="10:30">10:30</option>
-<option value="11:00">11:00</option>
-<option value="11:30">11:30</option>
-<option value="12:00">12:00</option>
-<option value="12:30">12:30</option>
-<option value="13:00">13:00</option>
-<option value="13:30">13:30</option>
-<option value="14:00">14:00</option>
-<option value="14:30">14:30</option>
-<option value="15:00">15:00</option>
-<option value="15:30">15:30</option>
-<option value="16:00">16:00</option>
-</select>
-</label>
+<input name="time" type="hidden" value=""/>
+<div class="book-time" role="group" aria-label="Time">
+<span class="book-time__label" id="book-time-heading">Time</span>
+<div aria-labelledby="book-time-heading" class="book-time-slots">
+<button class="book-time-slot" data-time="09:00" type="button">9:00</button>
+<button class="book-time-slot" data-time="09:30" type="button">9:30</button>
+<button class="book-time-slot" data-time="10:00" type="button">10:00</button>
+<button class="book-time-slot" data-time="10:30" type="button">10:30</button>
+<button class="book-time-slot" data-time="11:00" type="button">11:00</button>
+<button class="book-time-slot" data-time="11:30" type="button">11:30</button>
+<button class="book-time-slot" data-time="12:00" type="button">12:00</button>
+<button class="book-time-slot" data-time="12:30" type="button">12:30</button>
+<button class="book-time-slot" data-time="13:00" type="button">13:00</button>
+<button class="book-time-slot" data-time="13:30" type="button">13:30</button>
+<button class="book-time-slot" data-time="14:00" type="button">14:00</button>
+<button class="book-time-slot" data-time="14:30" type="button">14:30</button>
+<button class="book-time-slot" data-time="15:00" type="button">15:00</button>
+<button class="book-time-slot" data-time="15:30" type="button">15:30</button>
+<button class="book-time-slot" data-time="16:00" type="button">16:00</button>
 </div>
+</div>
+</div>
+<label>Phone (optional) <input autocomplete="tel" inputmode="tel" name="phone" type="tel" placeholder="e.g. 718-555-0100"/></label>
 <label>Notes (optional) <textarea name="notes" placeholder="Main concern, language preference, etc."></textarea></label>
 <div class="book-form__actions">
 <button class="cta-btn" type="submit">Submit request</button>
@@ -239,6 +266,29 @@ function gtag_report_phone_conversion(url) {
     return new Date(y, m - 1, d, 12, 0, 0).getDay() === 5;
   }
 
+  var timeHidden = form.querySelector('input[name="time"]');
+  var timeButtons = form.querySelectorAll(".book-time-slot");
+
+  function setSelectedTime(value) {
+    if (timeHidden) timeHidden.value = value || "";
+    timeButtons.forEach(function (btn) {
+      var t = btn.getAttribute("data-time") || "";
+      var on = value && t === value;
+      btn.classList.toggle("is-selected", on);
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    });
+  }
+
+  timeButtons.forEach(function (btn) {
+    btn.setAttribute("aria-pressed", "false");
+    btn.addEventListener("click", function () {
+      var t = btn.getAttribute("data-time");
+      if (!t) return;
+      setSelectedTime(t);
+      showErr("");
+    });
+  });
+
   var dateInput = form.querySelector('input[name="date"]');
   if (dateInput) {
     dateInput.addEventListener("change", function () {
@@ -254,6 +304,10 @@ function gtag_report_phone_conversion(url) {
     });
   }
 
+  form.addEventListener("reset", function () {
+    setSelectedTime("");
+  });
+
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     showErr("");
@@ -265,10 +319,6 @@ function gtag_report_phone_conversion(url) {
     var timeStr = fd.get("time") || "";
     var notes = String(fd.get("notes") || "").trim();
 
-    if (!phone) {
-      showErr("Please enter your phone number.");
-      return;
-    }
     if (!dateStr || !timeStr || timeStr === "") {
       showErr("Please choose a date and time slot.");
       return;
@@ -295,7 +345,7 @@ function gtag_report_phone_conversion(url) {
     var end = new Date(start.getTime() + SLOT_MS);
 
     var payload = {
-      summary: "Guoyitang booking · " + phone,
+      summary: phone ? "Guoyitang booking · " + phone : "Guoyitang booking",
       start: fmtLocal(start),
       end: fmtLocal(end),
       timeZone: TZ_LABEL,
@@ -319,6 +369,7 @@ function gtag_report_phone_conversion(url) {
           "Added to the clinic calendar. We may call to confirm. Questions? 718-888-1133."
         );
         form.reset();
+        setSelectedTime("");
         return;
       }
 
