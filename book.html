@@ -363,6 +363,13 @@ function gtag_report_phone_conversion(url) {
         ct.indexOf("application/json") !== -1 ? await res.json() : {};
 
       if (res.ok && j.ok) {
+        if (typeof gtag === "function") {
+          gtag("event", "form_submit", {
+            form_id: "book-form",
+            form_name: "book_appointment",
+            language: "zh",
+          });
+        }
         var line =
           "已写入诊所日历。请留意电话确认；如遇系统错误可来电 718-888-1133。";
         showOk(line);

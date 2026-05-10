@@ -365,6 +365,13 @@ function gtag_report_phone_conversion(url) {
         ct.indexOf("application/json") !== -1 ? await res.json() : {};
 
       if (res.ok && j.ok) {
+        if (typeof gtag === "function") {
+          gtag("event", "form_submit", {
+            form_id: "book-form",
+            form_name: "book_appointment",
+            language: "en",
+          });
+        }
         showOk(
           "Added to the clinic calendar. We may call to confirm. Questions? 718-888-1133."
         );
