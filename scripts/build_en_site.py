@@ -127,6 +127,7 @@ SKIP_EN_TRANSLATE = frozenset(
         "book.html",
         "blog/posts/tcm-yinyang-explained.html",
         "blog/posts/lixia-solar-term-wellness.html",
+        "blog/posts/irregular-menstruation-tcm-causes.html",
     }
 )
 

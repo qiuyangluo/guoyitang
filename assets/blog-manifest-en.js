@@ -3,6 +3,15 @@ window.__BLOG_MANIFEST__ = {
   updated: "2026-05-05",
   posts: [
     {
+      slug: "irregular-menstruation-tcm-causes",
+      title:
+        "Irregular periods from a TCM lens: common root patterns and what differentiation means",
+      date: "2026-05-05",
+      excerpt:
+        "Kidney, Liver, Spleen, and the Chong/Ren vessels in cycle health; outlines of kidney deficiency, liver constraint, spleen deficiency, heat, blood stasis, and phlegm-damp—education only. When to seek urgent Western care. Guoyitang Flushing.",
+      author: "guoyitang11366@gmail.com",
+    },
+    {
       slug: "lixia-solar-term-wellness",
       title:
         "Lixia (Beginning of Summer) wellness: calm heart-fire, support Yang, fortify the Spleen, ease dampness",
