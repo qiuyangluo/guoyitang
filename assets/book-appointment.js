@@ -21,7 +21,6 @@
           network: "Network error. Please call the clinic to book.",
           apiFail: "Could not save. Please call the clinic or try again.",
           successTitle: "Request received",
-          successRef: "Reference",
           successDetail: "Preferred visit",
           successHint: "We've saved your request. To reschedule, call",
           successNew: "Book another visit",
@@ -45,7 +44,6 @@
           network: "网络错误，请致电诊所预约。",
           apiFail: "提交失败，请改打电话预约或稍后再试。",
           successTitle: "预约已收到",
-          successRef: "参考编号",
           successDetail: "您的到诊意向",
           successHint: "我们已记录您的预约。如需改期请致电",
           successNew: "再约一次",
@@ -59,7 +57,6 @@
   var form = document.getElementById("book-form");
   var errEl = document.getElementById("book-err");
   var successPanel = document.getElementById("book-success");
-  var successRefEl = document.getElementById("book-success-ref");
   var successDetailEl = document.getElementById("book-success-detail");
   var successNewBtn = document.getElementById("book-success-new");
   var quickDatesEl = document.getElementById("book-quick-dates");
@@ -170,19 +167,6 @@
           (h >= 12 ? " pm" : " am")
         : h + ":" + m;
     return datePart + " · " + timePart;
-  }
-
-  function makeBookingRef() {
-    var n = new Date();
-    var code = ("0000" + Math.floor(Math.random() * 0xffff).toString(16).toUpperCase()).slice(-4);
-    return (
-      "GT-" +
-      String(n.getFullYear()).slice(-2) +
-      pad(n.getMonth() + 1) +
-      pad(n.getDate()) +
-      "-" +
-      code
-    );
   }
 
   function updateSteps() {
@@ -298,12 +282,10 @@
   }
 
   function showSuccessPanel(dateStr, timeStr) {
-    var ref = makeBookingRef();
     form.hidden = true;
     if (stepsEl) stepsEl.hidden = true;
     if (successPanel) {
       successPanel.hidden = false;
-      if (successRefEl) successRefEl.textContent = ref;
       if (successDetailEl) {
         successDetailEl.textContent = formatDisplayDateTime(dateStr, timeStr);
       }
@@ -312,12 +294,10 @@
     bookEvent("book_submit_success", {
       appointment_date: dateStr,
       appointment_time: timeStr,
-      booking_ref: ref,
     });
     bookEvent("form_submit", {
       appointment_date: dateStr,
       appointment_time: timeStr,
-      booking_ref: ref,
     });
     successPanel && successPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }
