@@ -1,7 +1,15 @@
 /* Blog listing data — edit this file when adding posts (see blog/NEW-POST.txt). */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-05-05",
+  updated: "2026-05-21",
   posts: [
+    {
+      slug: "office-worker-cervical-pain-tcm",
+      title: "上班族颈椎不适：当代「低头族」颈酸头昏，中医如何辨识与养护",
+      date: "2026-05-21",
+      excerpt:
+        "久坐伏案、刷手机与熬夜：年轻人颈酸头昏肩紧的常见诱因；中医项痹、气滞血瘀与肝肾筋骨；工位防护、工间活动与何时考虑针灸推拿。法拉盛国医堂科普，须辨证面诊。",
+      author: "国医堂",
+    },
     {
       slug: "irregular-menstruation-tcm-causes",
       title: "月经不调的中医病因与常见辨证思路",

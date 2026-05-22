@@ -1,7 +1,16 @@
 /* English blog listing — keep in sync with assets/blog-manifest.js slugs/dates/authors. */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-05-05",
+  updated: "2026-05-21",
   posts: [
+    {
+      slug: "office-worker-cervical-pain-tcm",
+      title:
+        "Desk neck pain for young office workers: “text neck,” stiffness, and TCM care",
+      date: "2026-05-21",
+      excerpt:
+        "Screens, WFH, and stress: why neck pain hits young workers; TCM patterns; desk breaks and when to consider acupuncture in Flushing. Education only—see a licensed clinician.",
+      author: "Guoyitang",
+    },
     {
       slug: "irregular-menstruation-tcm-causes",
       title:
