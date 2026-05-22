@@ -30,56 +30,132 @@
   width: min(100%, 28rem);
 }
 .book-layout #book-err,
-.book-layout #book-ok { margin-left: auto; margin-right: auto; }
+.book-layout .book-success { margin-left: auto; margin-right: auto; }
+.book-steps {
+  display: flex;
+  justify-content: center;
+  gap: 0.35rem;
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem;
+  width: min(100%, 28rem);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.book-steps__item {
+  flex: 1;
+  text-align: center;
+  padding: 0.4rem 0.35rem;
+  border-radius: 999px;
+  color: var(--muted, #4a5942);
+  background: rgba(53, 77, 44, 0.06);
+}
+.book-steps__item.is-active { background: rgba(53, 77, 44, 0.18); color: var(--ink, #1f2a17); }
+.book-steps__item.is-done { color: #1b5e20; background: rgba(27, 94, 32, 0.1); }
 .book-form {
   display: grid;
-  gap: 1rem;
-  margin-top: 1.25rem;
+  gap: 1.1rem;
+  margin-top: 0.5rem;
   width: min(100%, 28rem);
 }
 .book-form label { display: flex; flex-direction: column; gap: 0.35rem; font-weight: 600; font-size: 0.9rem; }
-.book-form input, .book-form select, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; background: #fff; }
-.book-form select { cursor: pointer; }
-.book-form textarea { min-height: 4.5rem; resize: vertical; }
-.book-form__datetime { display: flex; flex-direction: column; gap: 0.65rem; }
-.book-time { margin-top: 0.15rem; }
-.book-time__label { display: block; font-weight: 600; font-size: 0.9rem; margin-bottom: 0.4rem; }
-.book-time-slots { display: flex; flex-wrap: wrap; gap: 0.45rem; }
-.book-time-slot {
+.book-form input, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; background: #fff; }
+.book-form textarea { min-height: 4rem; resize: vertical; }
+.book-step-label { font-weight: 600; font-size: 0.9rem; }
+.book-date-hint, .book-time-hint { margin: 0.25rem 0 0; font-size: 0.82rem; color: var(--muted, #4a5942); font-weight: 500; }
+.book-quick-dates { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.35rem; }
+.book-date-pill {
   margin: 0;
-  padding: 0.45rem 0.65rem;
+  padding: 0.5rem 0.7rem;
   border: 1px solid rgba(53, 77, 44, 0.4);
-  border-radius: 8px;
+  border-radius: 999px;
   font: inherit;
-  font-size: 0.88rem;
+  font-size: 0.86rem;
   font-weight: 600;
   background: #fff;
-  color: var(--ink, #1f2a17);
   cursor: pointer;
   line-height: 1.2;
-  transition: background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
-.book-time-slot:hover { border-color: rgba(53, 77, 44, 0.65); background: rgba(53, 77, 44, 0.06); }
-.book-time-slot:focus-visible {
+.book-date-pill:hover { background: rgba(53, 77, 44, 0.06); }
+.book-date-pill.is-selected {
+  background: rgba(53, 77, 44, 0.14);
+  border-color: rgba(53, 77, 44, 0.75);
+}
+.book-date-pill:focus-visible, .book-time-slot:focus-visible {
   outline: 2px solid var(--accent-green, #4a7c3a);
   outline-offset: 2px;
 }
+.book-more-dates { margin-top: 0.5rem; font-size: 0.88rem; }
+.book-more-dates summary { cursor: pointer; color: var(--muted, #4a5942); font-weight: 600; }
+.book-more-dates input { margin-top: 0.45rem; width: 100%; box-sizing: border-box; }
+.book-time--locked { opacity: 0.55; pointer-events: none; }
+.book-time-period { margin-top: 0.65rem; }
+.book-time-period__label {
+  display: block;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted, #4a5942);
+  margin-bottom: 0.35rem;
+}
+.book-time-slots { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.book-time-slot {
+  margin: 0;
+  min-width: 3.25rem;
+  padding: 0.45rem 0.55rem;
+  border: 1px solid rgba(53, 77, 44, 0.4);
+  border-radius: 8px;
+  font: inherit;
+  font-size: 0.86rem;
+  font-weight: 600;
+  background: #fff;
+  cursor: pointer;
+}
+.book-time-slot:hover { border-color: rgba(53, 77, 44, 0.65); background: rgba(53, 77, 44, 0.06); }
 .book-time-slot.is-selected {
   background: rgba(53, 77, 44, 0.12);
   border-color: rgba(53, 77, 44, 0.75);
-  box-shadow: inset 0 0 0 1px rgba(53, 77, 44, 0.15);
 }
-.book-form__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  align-items: center;
-  justify-content: center;
-  margin-top: 0.35rem;
+.book-form__extra--locked { opacity: 0.65; }
+.book-form__extra--locked input, .book-form__extra--locked textarea { pointer-events: none; }
+.book-form__actions { margin-top: 0.25rem; text-align: center; }
+.book-form__actions .cta-btn { width: 100%; max-width: 16rem; }
+.book-alt-contact {
+  margin: 0.5rem 0 0;
+  text-align: center;
+  font-size: 0.82rem;
+  color: var(--muted, #4a5942);
+  line-height: 1.5;
 }
+.book-alt-contact a { color: inherit; }
+.book-alt-contact__link { text-decoration: underline; }
 .book-note { margin: 0 0 0.75rem; font-size: 0.92rem; color: var(--muted, #4a5942); line-height: 1.55; }
 #book-err { color: #b42318; font-size: 0.9rem; display: none; margin-bottom: 0.75rem; }
-#book-ok { color: #1b5e20; font-weight: 600; display: none; margin-bottom: 0.75rem; }
+.book-success {
+  width: min(100%, 28rem);
+  padding: 1.35rem 1.1rem;
+  border-radius: 12px;
+  border: 1px solid rgba(27, 94, 32, 0.35);
+  background: linear-gradient(180deg, rgba(27, 94, 32, 0.08) 0%, rgba(255, 255, 255, 0.95) 100%);
+  text-align: center;
+}
+.book-success__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  margin: 0 auto 0.65rem;
+  border-radius: 50%;
+  background: #1b5e20;
+  color: #fff;
+  font-size: 1.35rem;
+  line-height: 2.75rem;
+  font-weight: 700;
+}
+.book-success__title { margin: 0 0 0.5rem; font-size: 1.25rem; color: #1b5e20; }
+.book-success__ref { margin: 0 0 0.35rem; font-size: 0.9rem; }
+.book-success__detail { margin: 0 0 0.65rem; font-size: 1.05rem; font-weight: 700; color: var(--ink, #1f2a17); }
+.book-success__hint { margin: 0 0 1rem; font-size: 0.88rem; color: var(--muted, #4a5942); line-height: 1.55; }
+.book-success__hint a { color: var(--ink, #1f2a17); }
 </style>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M3EJ79RT1R"></script>
 <script>
@@ -149,28 +225,48 @@ function gtag_report_phone_conversion(url) {
 <div class="page-hero">
 <div class="container">
 <h1>在线预约</h1>
-<p class="page-lead">请先选择<strong>日期</strong>与<strong>时段</strong>；手机号与备注为选填。提交后诊所会记下您的意向，<strong>有需要时会来电与您确认</strong>。</p>
+<p class="page-lead">三步完成预约：<strong>选日期 → 选时段 → 提交</strong>。</p>
 </div>
 </div>
 <div class="container inner-block">
 <section class="section">
 <div class="section__inner book-layout">
-<p class="book-note">营业时间：<strong>周一至周四、周六、周日</strong> 9:00–17:00；<strong>周五休息</strong>。急症请先拨打 911 或赴急诊。</p>
+<p class="book-note">营业时间：<strong>周一至周四、周六、周日</strong> 9:00–17:00；<strong>周五休息</strong>。</p>
 <p id="book-err" role="alert"></p>
-<p id="book-ok" role="status"></p>
+<ol aria-label="预约步骤" class="book-steps">
+<li class="book-steps__item is-active" data-step="1">1 日期</li>
+<li class="book-steps__item" data-step="2">2 时段</li>
+<li class="book-steps__item" data-step="3">3 提交</li>
+</ol>
 <form class="book-form" id="book-form" novalidate="">
 <div class="book-form__datetime">
-<label>日期 <input name="date" required="" type="date"/></label>
+<div class="book-date-step">
+<span class="book-step-label">选择日期</span>
+<p class="book-date-hint">周五休诊，请从下方可约日期中选择</p>
+<div aria-label="快速选日期" class="book-quick-dates" id="book-quick-dates" role="group"></div>
+<details class="book-more-dates">
+<summary>选择其他日期</summary>
+<input id="book-date-input" name="date" required="" type="date"/>
+</details>
+</div>
 <input name="time" type="hidden" value=""/>
-<div class="book-time" role="group" aria-label="选择时间">
-<span class="book-time__label" id="book-time-heading">时间</span>
-<div aria-labelledby="book-time-heading" class="book-time-slots">
+<div aria-labelledby="book-time-heading" class="book-time book-time--locked" id="book-time-section" role="group">
+<span class="book-step-label" id="book-time-heading">选择时段</span>
+<p class="book-time-hint" id="book-time-hint">请先选择日期</p>
+<div class="book-time-period">
+<span class="book-time-period__label">上午</span>
+<div class="book-time-slots">
 <button class="book-time-slot" data-time="09:00" type="button">9:00</button>
 <button class="book-time-slot" data-time="09:30" type="button">9:30</button>
 <button class="book-time-slot" data-time="10:00" type="button">10:00</button>
 <button class="book-time-slot" data-time="10:30" type="button">10:30</button>
 <button class="book-time-slot" data-time="11:00" type="button">11:00</button>
 <button class="book-time-slot" data-time="11:30" type="button">11:30</button>
+</div>
+</div>
+<div class="book-time-period">
+<span class="book-time-period__label">下午</span>
+<div class="book-time-slots">
 <button class="book-time-slot" data-time="12:00" type="button">12:00</button>
 <button class="book-time-slot" data-time="12:30" type="button">12:30</button>
 <button class="book-time-slot" data-time="13:00" type="button">13:00</button>
@@ -183,14 +279,24 @@ function gtag_report_phone_conversion(url) {
 </div>
 </div>
 </div>
+</div>
+<div class="book-form__extra book-form__extra--locked" id="book-form-extra">
 <label>手机号码（选填） <input autocomplete="tel" inputmode="tel" name="phone" type="tel" placeholder="例：718-555-0100"/></label>
 <label>备注（选填） <textarea name="notes" placeholder="主要症状、希望使用的语言等"></textarea></label>
+</div>
 <div class="book-form__actions">
 <button class="cta-btn" type="submit">提交预约</button>
-<a class="learn-more" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">电话预约</a>
-<a class="learn-more" href="/contact-us">联系我们</a>
 </div>
+<p class="book-alt-contact">更习惯电话？<a class="book-alt-contact__link" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">致电 718-888-1133</a> · <a href="/contact-us">联系我们</a></p>
 </form>
+<div class="book-success" hidden="" id="book-success">
+<div aria-hidden="true" class="book-success__icon">✓</div>
+<h2 class="book-success__title">预约已收到</h2>
+<p class="book-success__ref">参考编号：<strong id="book-success-ref"></strong></p>
+<p class="book-success__detail" id="book-success-detail"></p>
+<p class="book-success__hint">我们已记录您的预约。如需改期请致电 <a href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">718-888-1133</a>。</p>
+<button class="learn-more" id="book-success-new" type="button">再约一次</button>
+</div>
 </div>
 </section>
 </div>
@@ -221,239 +327,6 @@ function gtag_report_phone_conversion(url) {
 </footer>
 <script defer="" src="assets/nav.js"></script>
 <script defer="" src="assets/page-reveal.js"></script>
-<script>
-(function () {
-  var SLOT_MS = 60 * 60 * 1000;
-  var TZ_LABEL = "America/New_York";
-  var form = document.getElementById("book-form");
-  var errEl = document.getElementById("book-err");
-  var okEl = document.getElementById("book-ok");
-  if (!form) return;
-
-  var BOOK_LANG = "zh";
-
-  function bookEvent(name, params) {
-    if (typeof gtag !== "function") return;
-    var p = {
-      form_id: "book-form",
-      form_name: "book_appointment",
-      language: BOOK_LANG,
-    };
-    if (params) {
-      for (var k in params) {
-        if (Object.prototype.hasOwnProperty.call(params, k)) p[k] = params[k];
-      }
-    }
-    gtag("event", name, p);
-  }
-
-  bookEvent("book_form_view");
-
-  function showErr(msg) {
-    errEl.textContent = msg || "";
-    errEl.style.display = msg ? "block" : "none";
-  }
-  function showOk(msg) {
-    okEl.textContent = "";
-    if (!msg) {
-      okEl.style.display = "none";
-      return;
-    }
-    okEl.appendChild(document.createTextNode(msg));
-    okEl.style.display = "block";
-  }
-
-  function pad(n) {
-    return n < 10 ? "0" + n : String(n);
-  }
-  function fmtLocal(dt) {
-    return (
-      dt.getFullYear() +
-      "-" +
-      pad(dt.getMonth() + 1) +
-      "-" +
-      pad(dt.getDate()) +
-      "T" +
-      pad(dt.getHours()) +
-      ":" +
-      pad(dt.getMinutes()) +
-      ":00"
-    );
-  }
-
-  function isFridayYmd(y, m, d) {
-    return new Date(y, m - 1, d, 12, 0, 0).getDay() === 5;
-  }
-
-  var timeHidden = form.querySelector('input[name="time"]');
-  var timeButtons = form.querySelectorAll(".book-time-slot");
-
-  function setSelectedTime(value) {
-    if (timeHidden) timeHidden.value = value || "";
-    timeButtons.forEach(function (btn) {
-      var t = btn.getAttribute("data-time") || "";
-      var on = value && t === value;
-      btn.classList.toggle("is-selected", on);
-      btn.setAttribute("aria-pressed", on ? "true" : "false");
-    });
-  }
-
-  timeButtons.forEach(function (btn) {
-    btn.setAttribute("aria-pressed", "false");
-    btn.addEventListener("click", function () {
-      var t = btn.getAttribute("data-time");
-      if (!t) return;
-      setSelectedTime(t);
-      showErr("");
-      bookEvent("book_time_selected", { appointment_time: t });
-    });
-  });
-
-  var dateInput = form.querySelector('input[name="date"]');
-  if (dateInput) {
-    dateInput.addEventListener("change", function () {
-      showErr("");
-      var v = dateInput.value;
-      if (!v) return;
-      var p = v.split("-").map(Number);
-      if (p.length < 3) return;
-      if (isFridayYmd(p[0], p[1], p[2])) {
-        showErr("诊所周五休诊，请另选日期。");
-        dateInput.value = "";
-        bookEvent("book_date_rejected_friday", { appointment_date: v });
-        return;
-      }
-      bookEvent("book_date_selected", { appointment_date: v });
-    });
-  }
-
-  form.addEventListener("reset", function () {
-    setSelectedTime("");
-  });
-
-  form.addEventListener("submit", async function (e) {
-    e.preventDefault();
-    showErr("");
-    showOk("");
-
-    bookEvent("book_submit_click");
-
-    var fd = new FormData(form);
-    var phone = String(fd.get("phone") || "").trim();
-    var dateStr = fd.get("date");
-    var timeStr = fd.get("time") || "";
-    var notes = String(fd.get("notes") || "").trim();
-    var hasPhone = phone ? "yes" : "no";
-    var hasNotes = notes ? "yes" : "no";
-
-    if (!dateStr || !timeStr || timeStr === "") {
-      showErr("请选择日期与时间段。");
-      bookEvent("book_submit_validation_failed", {
-        failure_reason: "missing_date_or_time",
-        has_phone: hasPhone,
-        has_notes: hasNotes,
-      });
-      return;
-    }
-
-    var dp = dateStr.split("-").map(Number);
-    var tp = timeStr.split(":").map(Number);
-    if (dp.length < 3 || tp.length < 2) {
-      showErr("日期或时间格式无效。");
-      bookEvent("book_submit_validation_failed", {
-        failure_reason: "invalid_format",
-        has_phone: hasPhone,
-        has_notes: hasNotes,
-      });
-      return;
-    }
-    if (isFridayYmd(dp[0], dp[1], dp[2])) {
-      showErr("诊所周五休诊，请选择周一至周四、周六或周日。");
-      bookEvent("book_submit_validation_failed", {
-        failure_reason: "friday_closed",
-        appointment_date: dateStr,
-        appointment_time: timeStr,
-        has_phone: hasPhone,
-        has_notes: hasNotes,
-      });
-      return;
-    }
-
-    var start = new Date(dp[0], dp[1] - 1, dp[2], tp[0], tp[1] || 0, 0);
-    if (isNaN(start.getTime())) {
-      showErr("无法解析所选日期时间。");
-      bookEvent("book_submit_validation_failed", {
-        failure_reason: "unparseable_datetime",
-        has_phone: hasPhone,
-        has_notes: hasNotes,
-      });
-      return;
-    }
-    var end = new Date(start.getTime() + SLOT_MS);
-
-    var payload = {
-      summary: phone ? "国医堂预约 · " + phone : "国医堂预约",
-      start: fmtLocal(start),
-      end: fmtLocal(end),
-      timeZone: TZ_LABEL,
-      contactName: "网站预约",
-      contactPhone: phone,
-    };
-    if (notes) payload.notes = notes;
-
-    try {
-      var res = await fetch("/api/calendar-event", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
-      var ct = res.headers.get("content-type") || "";
-      var j =
-        ct.indexOf("application/json") !== -1 ? await res.json() : {};
-
-      if (res.ok && j.ok) {
-        bookEvent("book_submit_success", {
-          appointment_date: dateStr,
-          appointment_time: timeStr,
-          has_phone: hasPhone,
-          has_notes: hasNotes,
-        });
-        bookEvent("form_submit", {
-          appointment_date: dateStr,
-          appointment_time: timeStr,
-          has_phone: hasPhone,
-          has_notes: hasNotes,
-        });
-        var line =
-          "已写入诊所日历。请留意电话确认；如遇系统错误可来电 718-888-1133。";
-        showOk(line);
-        form.reset();
-        setSelectedTime("");
-        return;
-      }
-
-      bookEvent("book_submit_failed", {
-        failure_reason: "api_error",
-        http_status: res.status,
-        has_phone: hasPhone,
-        has_notes: hasNotes,
-      });
-      showErr(
-        (j && j.error) ||
-          "提交失败（" +
-            res.status +
-            "）。请改打电话预约或稍后再试。"
-      );
-    } catch (_) {
-      bookEvent("book_submit_failed", {
-        failure_reason: "network",
-        has_phone: hasPhone,
-        has_notes: hasNotes,
-      });
-      showErr("网络错误，请致电诊所预约。");
-    }
-  });
-})();
-</script>
+<script defer="" data-lang="zh" src="assets/book-appointment.js"></script>
 </body>
 </html>
