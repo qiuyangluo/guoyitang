@@ -230,6 +230,25 @@ function gtag_report_phone_conversion(url) {
   var okEl = document.getElementById("book-ok");
   if (!form) return;
 
+  var BOOK_LANG = "en";
+
+  function bookEvent(name, params) {
+    if (typeof gtag !== "function") return;
+    var p = {
+      form_id: "book-form",
+      form_name: "book_appointment",
+      language: BOOK_LANG,
+    };
+    if (params) {
+      for (var k in params) {
+        if (Object.prototype.hasOwnProperty.call(params, k)) p[k] = params[k];
+      }
+    }
+    gtag("event", name, p);
+  }
+
+  bookEvent("book_form_view");
+
   function showErr(msg) {
     errEl.textContent = msg || "";
     errEl.style.display = msg ? "block" : "none";
@@ -286,6 +305,7 @@ function gtag_report_phone_conversion(url) {
       if (!t) return;
       setSelectedTime(t);
       showErr("");
+      bookEvent("book_time_selected", { appointment_time: t });
     });
   });
 
@@ -300,7 +320,10 @@ function gtag_report_phone_conversion(url) {
       if (isFridayYmd(p[0], p[1], p[2])) {
         showErr("We're closed Fridays — please pick another day.");
         dateInput.value = "";
+        bookEvent("book_date_rejected_friday", { appointment_date: v });
+        return;
       }
+      bookEvent("book_date_selected", { appointment_date: v });
     });
   }
 
@@ -313,14 +336,23 @@ function gtag_report_phone_conversion(url) {
     showErr("");
     showOk("");
 
+    bookEvent("book_submit_click");
+
     var fd = new FormData(form);
     var phone = String(fd.get("phone") || "").trim();
     var dateStr = fd.get("date");
     var timeStr = fd.get("time") || "";
     var notes = String(fd.get("notes") || "").trim();
+    var hasPhone = phone ? "yes" : "no";
+    var hasNotes = notes ? "yes" : "no";
 
     if (!dateStr || !timeStr || timeStr === "") {
       showErr("Please choose a date and time slot.");
+      bookEvent("book_submit_validation_failed", {
+        failure_reason: "missing_date_or_time",
+        has_phone: hasPhone,
+        has_notes: hasNotes,
+      });
       return;
     }
 
@@ -328,18 +360,35 @@ function gtag_report_phone_conversion(url) {
     var tp = timeStr.split(":").map(Number);
     if (dp.length < 3 || tp.length < 2) {
       showErr("Invalid date or time.");
+      bookEvent("book_submit_validation_failed", {
+        failure_reason: "invalid_format",
+        has_phone: hasPhone,
+        has_notes: hasNotes,
+      });
       return;
     }
     if (isFridayYmd(dp[0], dp[1], dp[2])) {
       showErr(
         "We're closed Fridays. Please choose Monday–Thursday, Saturday, or Sunday."
       );
+      bookEvent("book_submit_validation_failed", {
+        failure_reason: "friday_closed",
+        appointment_date: dateStr,
+        appointment_time: timeStr,
+        has_phone: hasPhone,
+        has_notes: hasNotes,
+      });
       return;
     }
 
     var start = new Date(dp[0], dp[1] - 1, dp[2], tp[0], tp[1] || 0, 0);
     if (isNaN(start.getTime())) {
       showErr("Could not read the selected date and time.");
+      bookEvent("book_submit_validation_failed", {
+        failure_reason: "unparseable_datetime",
+        has_phone: hasPhone,
+        has_notes: hasNotes,
+      });
       return;
     }
     var end = new Date(start.getTime() + SLOT_MS);
@@ -365,13 +414,18 @@ function gtag_report_phone_conversion(url) {
         ct.indexOf("application/json") !== -1 ? await res.json() : {};
 
       if (res.ok && j.ok) {
-        if (typeof gtag === "function") {
-          gtag("event", "form_submit", {
-            form_id: "book-form",
-            form_name: "book_appointment",
-            language: "en",
-          });
-        }
+        bookEvent("book_submit_success", {
+          appointment_date: dateStr,
+          appointment_time: timeStr,
+          has_phone: hasPhone,
+          has_notes: hasNotes,
+        });
+        bookEvent("form_submit", {
+          appointment_date: dateStr,
+          appointment_time: timeStr,
+          has_phone: hasPhone,
+          has_notes: hasNotes,
+        });
         showOk(
           "Added to the clinic calendar. We may call to confirm. Questions? 718-888-1133."
         );
@@ -380,11 +434,22 @@ function gtag_report_phone_conversion(url) {
         return;
       }
 
+      bookEvent("book_submit_failed", {
+        failure_reason: "api_error",
+        http_status: res.status,
+        has_phone: hasPhone,
+        has_notes: hasNotes,
+      });
       showErr(
         (j && j.error) ||
           "Could not save (" + res.status + "). Please call the clinic or try again."
       );
     } catch (_) {
+      bookEvent("book_submit_failed", {
+        failure_reason: "network",
+        has_phone: hasPhone,
+        has_notes: hasNotes,
+      });
       showErr("Network error. Please call the clinic to book.");
     }
   });
