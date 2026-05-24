@@ -1,7 +1,15 @@
 /* Blog listing data — edit this file when adding posts (see blog/NEW-POST.txt). */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-05-21",
+  updated: "2026-05-24",
   posts: [
+    {
+      slug: "summer-dampness-spleen-tcm",
+      title: "夏天腹胀困重、口黏口苦？中医「暑湿困脾」辨识与养护",
+      date: "2026-05-24",
+      excerpt:
+        "入夏后腹胀、食欲差、身重如裹：中医暑湿困脾的常见表现、饮食作息与就医红线；纽约法拉盛脾胃调理科普，须辨证面诊，非个体化处方。",
+      author: "国医堂",
+    },
     {
       slug: "office-worker-cervical-pain-tcm",
       title: "上班族颈椎不适：当代「低头族」颈酸头昏，中医如何辨识与养护",

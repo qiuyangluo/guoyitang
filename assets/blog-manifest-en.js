@@ -1,7 +1,16 @@
 /* English blog listing — keep in sync with assets/blog-manifest.js slugs/dates/authors. */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-05-21",
+  updated: "2026-05-24",
   posts: [
+    {
+      slug: "summer-dampness-spleen-tcm",
+      title:
+        "Summer bloating and heaviness: TCM damp-heat and the Spleen",
+      date: "2026-05-24",
+      excerpt:
+        "Low appetite, distension, sticky mouth, and afternoon fatigue in summer—TCM patterns, diet tips, red flags, and Flushing care. Education only—see a licensed clinician.",
+      author: "Guoyitang",
+    },
     {
       slug: "office-worker-cervical-pain-tcm",
       title:

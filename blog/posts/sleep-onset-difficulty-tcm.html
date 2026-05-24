@@ -28,22 +28,7 @@ gtag('config', 'G-M3EJ79RT1R');
 gtag('config', 'AW-17707030959');
 </script>
 <!-- Event snippet for 点击通话 (2) conversion -->
-<script>
-function gtag_report_phone_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-17707030959/PKUsCISw0Z0cEK-zr_tB',
-      'value': 1.0,
-      'currency': 'USD',
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
+<script src="/assets/phone-analytics.js"></script>
 <!-- Event snippet for 预约服务 - 跳转预约网站 conversion page
 In your html page, add the snippet and call gtag_report_conversion when someone clicks on the chosen link or button. -->
 <script>

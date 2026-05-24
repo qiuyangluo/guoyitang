@@ -29,22 +29,7 @@ gtag('config', 'G-M3EJ79RT1R');
 gtag('config', 'AW-17707030959');
 </script>
 Event snippet for click to call (2) conversion
-<script>
-function gtag_report_phone_conversion(url) {
-  var callback = function () {
-    if (typeof(url) != 'undefined') {
-      window.location = url;
-    }
-  };
-  gtag('event', 'conversion', {
-      'send_to': 'AW-17707030959/PKUsCISw0Z0cEK-zr_tB',
-      'value': 1.0,
-      'currency': 'USD',
-      'event_callback': callback
-  });
-  return false;
-}
-</script>
+<script src="/assets/phone-analytics.js"></script>
 Event snippet for reservation service - jump to reservation website conversion page
 <script>
 function gtag_report_conversion(url) {
