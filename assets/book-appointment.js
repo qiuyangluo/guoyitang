@@ -25,6 +25,7 @@
           successHint: "We've saved your request. To reschedule, call",
           successNew: "Book another visit",
           contactLink: "Contact",
+          submitting: "Submitting…",
         }
       : {
           today: "今天",
@@ -48,6 +49,7 @@
           successHint: "我们已记录您的预约。如需改期请致电",
           successNew: "再约一次",
           contactLink: "联系我们",
+          submitting: "提交中…",
         };
 
   var SLOT_MS = 60 * 60 * 1000;
@@ -67,6 +69,18 @@
   var stepsEl = document.querySelector(".book-steps");
 
   if (!form) return;
+
+  var submitting = false;
+  var submitBtn = form.querySelector('button[type="submit"]');
+  var submitBtnDefaultText = submitBtn ? submitBtn.textContent : "";
+
+  function setSubmitting(on) {
+    submitting = on;
+    if (!submitBtn) return;
+    submitBtn.disabled = on;
+    submitBtn.setAttribute("aria-busy", on ? "true" : "false");
+    submitBtn.textContent = on ? T.submitting : submitBtnDefaultText;
+  }
 
   function bookEvent(name, params) {
     if (typeof gtag !== "function") return;
@@ -303,6 +317,7 @@
   }
 
   function resetBookingUi() {
+    setSubmitting(false);
     form.hidden = false;
     if (stepsEl) stepsEl.hidden = false;
     if (successPanel) successPanel.hidden = true;
@@ -383,6 +398,7 @@
 
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
+    if (submitting) return;
     showErr("");
     bookEvent("book_submit_click");
 
@@ -456,6 +472,7 @@
     };
     if (notes) payload.notes = notes;
 
+    setSubmitting(true);
     try {
       var res = await fetch("/api/calendar-event", {
         method: "POST",
@@ -477,6 +494,7 @@
         has_notes: hasNotes,
       });
       showErr((j && j.error) || T.apiFail + " (" + res.status + ")");
+      setSubmitting(false);
     } catch (_) {
       bookEvent("book_submit_failed", {
         failure_reason: "network",
@@ -484,6 +502,7 @@
         has_notes: hasNotes,
       });
       showErr(T.network);
+      setSubmitting(false);
     }
   });
 })();
