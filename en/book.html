@@ -13,7 +13,7 @@
 <title>Book a visit | Guoyitang Flushing TCM</title>
 <meta content="Book online: phone and preferred date &amp; time. Guoyitang Flushing. Call 718-888-1133 anytime." name="description"/>
 <link href="https://guoyitangus.com/en/book" rel="canonical"/>
-<meta content="#354d2c" name="theme-color"/>
+<meta content="#5c8607" name="theme-color"/>
 <link href="/favicon-32x32.png" rel="icon" sizes="32x32" type="image/png"/>
 <link href="/apple-touch-icon.png" rel="apple-touch-icon" sizes="180x180"/>
 <link as="style" href="/assets/main.min.css" onload="this.onload=null;this.rel='stylesheet'" rel="preload"/>
@@ -47,10 +47,10 @@
   text-align: center;
   padding: 0.4rem 0.35rem;
   border-radius: 999px;
-  color: var(--muted, #4a5942);
+  color: var(--text-light);
   background: rgba(53, 77, 44, 0.06);
 }
-.book-steps__item.is-active { background: rgba(53, 77, 44, 0.18); color: var(--ink, #1f2a17); }
+.book-steps__item.is-active { background: rgba(53, 77, 44, 0.18); color: var(--ink); }
 .book-steps__item.is-done { color: #1b5e20; background: rgba(27, 94, 32, 0.1); }
 .book-form {
   display: grid;
@@ -58,11 +58,12 @@
   margin-top: 0.5rem;
   width: min(100%, 28rem);
 }
-.book-form label { display: flex; flex-direction: column; gap: 0.35rem; font-weight: 600; font-size: 0.9rem; }
-.book-form input, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; background: #fff; }
+.book-form label { display: flex; flex-direction: column; gap: 0.35rem; font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+.book-form input, .book-form textarea { padding: 0.55rem 0.65rem; border: 1px solid rgba(53, 77, 44, 0.35); border-radius: 8px; font: inherit; background: #fff; color: var(--ink); }
+.book-form input::placeholder, .book-form textarea::placeholder { color: var(--text-light); opacity: 1; }
 .book-form textarea { min-height: 4rem; resize: vertical; }
-.book-step-label { font-weight: 600; font-size: 0.9rem; }
-.book-date-hint, .book-time-hint { margin: 0.25rem 0 0; font-size: 0.82rem; color: var(--muted, #4a5942); font-weight: 500; }
+.book-step-label { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+.book-date-hint, .book-time-hint { margin: 0.25rem 0 0; font-size: 0.88rem; color: var(--text-medium); font-weight: 500; }
 .book-quick-dates { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.35rem; }
 .book-date-pill {
   margin: 0;
@@ -72,6 +73,7 @@
   font: inherit;
   font-size: 0.86rem;
   font-weight: 600;
+  color: var(--ink);
   background: #fff;
   cursor: pointer;
   line-height: 1.2;
@@ -86,7 +88,7 @@
   outline-offset: 2px;
 }
 .book-more-dates { margin-top: 0.5rem; font-size: 0.88rem; }
-.book-more-dates summary { cursor: pointer; color: var(--muted, #4a5942); font-weight: 600; }
+.book-more-dates summary { cursor: pointer; color: var(--brand); font-weight: 600; }
 .book-more-dates input { margin-top: 0.45rem; width: 100%; box-sizing: border-box; }
 .book-time--locked { opacity: 0.55; pointer-events: none; }
 .book-time-period { margin-top: 0.65rem; }
@@ -96,7 +98,7 @@
   font-weight: 700;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--muted, #4a5942);
+  color: var(--text-medium);
   margin-bottom: 0.35rem;
 }
 .book-time-slots { display: flex; flex-wrap: wrap; gap: 0.4rem; }
@@ -109,6 +111,7 @@
   font: inherit;
   font-size: 0.86rem;
   font-weight: 600;
+  color: var(--ink);
   background: #fff;
   cursor: pointer;
 }
@@ -124,13 +127,13 @@
 .book-alt-contact {
   margin: 0.5rem 0 0;
   text-align: center;
-  font-size: 0.82rem;
-  color: var(--muted, #4a5942);
+  font-size: 0.9rem;
+  color: var(--text-medium);
   line-height: 1.5;
 }
-.book-alt-contact a { color: inherit; }
+.book-alt-contact a { color: var(--brand); }
 .book-alt-contact__link { text-decoration: underline; }
-.book-note { margin: 0 0 0.75rem; font-size: 0.92rem; color: var(--muted, #4a5942); line-height: 1.55; }
+.book-note { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--text-medium); line-height: 1.55; }
 #book-err { color: #b42318; font-size: 0.9rem; display: none; margin-bottom: 0.75rem; }
 .book-success {
   width: min(100%, 28rem);
@@ -152,9 +155,9 @@
   font-weight: 700;
 }
 .book-success__title { margin: 0 0 0.5rem; font-size: 1.25rem; color: #1b5e20; }
-.book-success__detail { margin: 0 0 0.65rem; font-size: 1.05rem; font-weight: 700; color: var(--ink, #1f2a17); }
-.book-success__hint { margin: 0 0 1rem; font-size: 0.88rem; color: var(--muted, #4a5942); line-height: 1.55; }
-.book-success__hint a { color: var(--ink, #1f2a17); }
+.book-success__detail { margin: 0 0 0.65rem; font-size: 1.05rem; font-weight: 700; color: var(--ink); }
+.book-success__hint { margin: 0 0 1rem; font-size: 0.92rem; color: var(--text-medium); line-height: 1.55; }
+.book-success__hint a { color: var(--brand); font-weight: 600; }
 </style>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M3EJ79RT1R"></script>
 <script>
@@ -171,39 +174,41 @@ gtag('config', 'AW-17707030959');
 <body>
 <nav aria-label="Main navigation" class="navbar">
 <div class="nav-container">
-<a class="logo" href="/en/"><img alt="Guoyitang Traditional Chinese Medicine Clinic Logo" height="42" src="/image/guoyitang-logo-header-125x42.webp" width="125"/></a>
+<a class="logo" href="/en/"><img alt="Guoyitang Traditional Chinese Medicine Clinic Logo (Guoyitang TCM)" height="42" src="/image/guoyitang-logo-header-125x42.webp" width="125"/></a>
 <ul class="nav-links">
-<li><a href="/en/">Home page</a></li>
-<li><a href="/en/about-us">about Us</a></li>
-<li><a href="/en/doctors">Team Guoyitang</a></li>
-<li><a href="/en/services">Diagnosis and treatment services</a></li>
-<li><a href="/en/successful-cases">Success Stories</a></li>
-<li><a href="/en/patient-review">Positive reviews from patients</a></li>
-<li><a href="/en/blog/">Health column</a></li>
-<li><a href="/en/contact-us">Contact us</a></li>
+<li><a href="/en/">Home</a></li>
+<li><a href="/en/services">Services</a></li>
+<li class="nav-has-sub"><a href="/en/about-us">About Us</a>
+<ul class="nav-sub">
+<li><a href="/en/doctors">Our Team</a></li>
+</ul>
+</li>
+<li class="nav-has-sub"><a href="/en/successful-cases">Success Stories</a>
+<ul class="nav-sub">
+<li><a href="/en/patient-review">Patient Reviews</a></li>
+</ul>
+</li>
+<li><a href="/en/contact-us">Contact</a></li>
+<li><a class="nav-book" href="/en/book" aria-current="page">Book Online</a></li>
 </ul>
 <div class="nav-actions">
-<a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">718-888-1133</a>
-<a class="lang-switch" href="/book">中文</a>
-<a class="cta-nav" href="/en/book" aria-current="page">Make an appointment</a>
+<a class="lang-switch" href="/book">中文</a> <a class="cta-nav cta-nav--phone" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">Call: 718-888-1133</a>
 </div>
 <button aria-controls="mobileMenu" aria-expanded="false" aria-label="Open menu" class="mobile-menu-toggle" type="button">☰</button>
 </div>
 <div class="mobile-menu" id="mobileMenu">
 <ul class="mobile-nav-links">
-<li><a href="/en/">Home page</a></li>
-<li><a href="/en/about-us">about Us</a></li>
-<li><a href="/en/doctors">Team Guoyitang</a></li>
-<li><a href="/en/services">Diagnosis and treatment services</a></li>
+<li><a href="/en/">Home</a></li>
+<li><a href="/en/services">Services</a></li>
+<li><a href="/en/about-us">About Us</a></li>
+<li><a href="/en/doctors">Our Team</a></li>
 <li><a href="/en/successful-cases">Success Stories</a></li>
-<li><a href="/en/patient-review">Positive reviews from patients</a></li>
-<li><a href="/en/blog/">Health column</a></li>
-<li><a href="/en/contact-us">Contact us</a></li>
+<li><a href="/en/patient-review">Patient Reviews</a></li>
+<li><a href="/en/contact-us">Contact</a></li>
+<li><a href="/en/book" aria-current="page">Book Online</a></li>
 </ul>
 <div class="mobile-actions">
-<a class="language-btn" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">Call 718-888-1133</a>
-<a class="lang-switch" href="/book">中文</a>
-<a class="cta-nav" href="/en/book" aria-current="page">Make an appointment</a>
+<a class="lang-switch" href="/book">中文</a> <a class="cta-nav cta-nav--phone" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">Call: 718-888-1133</a>
 </div>
 </div>
 </nav>
@@ -267,7 +272,7 @@ gtag('config', 'AW-17707030959');
 </div>
 </div>
 <div class="book-form__extra book-form__extra--locked" id="book-form-extra">
-<label>Phone (optional) <input autocomplete="tel" inputmode="tel" name="phone" type="tel" placeholder="e.g. 718-555-0100"/></label>
+<label>Phone number <input autocomplete="tel" inputmode="tel" name="phone" required="" type="tel" placeholder="e.g. 718-555-0100"/></label>
 <label>Notes (optional) <textarea name="notes" placeholder="Main concern, language preference, etc."></textarea></label>
 </div>
 <div class="book-form__actions">
@@ -289,22 +294,64 @@ gtag('config', 'AW-17707030959');
 <footer class="site-footer">
 <div class="container">
 <div class="footer-content">
-<div class="footer-section">
-<img alt="Guoyitang logo" decoding="async" height="80" loading="lazy" src="/image/guoyitang-logo-footer.webp" style="max-width:180px;opacity:.95;margin-bottom:1rem;height:auto" width="241"/>
-<p>Guoyitang TCM Clinic · Flushing, NY</p>
+<div class="footer-section footer-section--logo">
+<img alt="Guoyitang TCM Clinic logo" decoding="async" height="81" loading="lazy" src="/image/guoyitang-logo-footer.webp" width="241"/>
 </div>
-<div class="footer-section">
-<h3>navigation</h3>
-<ul>
+<div class="footer-section footer-section--nav">
+<h3>Clinic</h3>
+<nav aria-label="Footer navigation">
+<ul class="footer-nav">
 <li><a href="/en/">Home</a></li>
+<li><a href="/en/about-us">About</a></li>
 <li><a href="/en/services">Services</a></li>
-<li><a href="/en/contact-us">Contact</a></li>
+<li><a href="/en/doctors">Our Team</a></li>
+<li><a href="/en/patient-review">Reviews</a></li>
+<li><a href="/en/successful-cases">Success Stories</a></li>
 </ul>
+</nav>
 </div>
-<div class="footer-section">
-<h3>connect</h3>
-<p><a href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">(718) 888-1133</a></p>
-<p>142-38 37th Ave #1C1D<br/>Flushing, NY 11354</p>
+<div class="footer-section footer-section--form">
+<h3>Contact Us</h3>
+<form action="#" class="footer-form" method="post" novalidate="">
+<div class="footer-form__field">
+<label for="footer-name">Your name <span class="footer-form__req">*</span></label>
+<input autocomplete="name" id="footer-name" name="name" required="" type="text"/>
+</div>
+<div class="footer-form__field">
+<label for="footer-phone">Phone number</label>
+<input autocomplete="tel" id="footer-phone" name="phone" type="tel"/>
+</div>
+<div class="footer-form__field">
+<label for="footer-message">Appointment details</label>
+<div class="footer-form__hint">
+<span>Or call <a href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">(718) 888-1133</a></span>
+<span aria-live="polite" class="footer-form__count">0 / 180</span>
+</div>
+<textarea id="footer-message" maxlength="180" name="message" placeholder="Please share your main concerns, preferred date and time, and any other questions." rows="5"></textarea>
+</div>
+<button class="footer-form__submit" type="submit">Submit</button>
+</form>
+</div>
+<div class="footer-section footer-section--info">
+<div class="footer-info-block">
+<h4>Address</h4>
+<p>142-38 37th Ave #1C1D, Flushing, NY 11354</p>
+</div>
+<div class="footer-info-block">
+<h4>Phone</h4>
+<p><a href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">(718) 888-1133</a><br/>
+<a href="tel:+17188868979" onclick="return gtag_report_phone_conversion('tel:+17188868979');">(718) 886-8979</a></p>
+</div>
+<div class="footer-info-block">
+<h4>Hours</h4>
+<p>Monday: 9:00 am – 5:00pm<br/>
+Tuesday: 9:00 am – 5:00pm<br/>
+Wednesday: 9:00 am – 5:00pm<br/>
+Thursday: 9:00 am – 5:00pm<br/>
+Friday: Closed<br/>
+Saturday: 9:00 am – 5:00pm<br/>
+Sunday: 9:00 am – 5:00pm</p>
+</div>
 </div>
 </div>
 <div class="footer-bottom">Copyright © 2026 Guoyitang</div>
@@ -313,5 +360,6 @@ gtag('config', 'AW-17707030959');
 <script defer="" src="/assets/nav.js"></script>
 <script defer="" src="/assets/page-reveal.js"></script>
 <script defer="" data-lang="en" src="/assets/book-appointment.js"></script>
+<script defer src="/assets/footer-form.js"></script>
 </body>
 </html>

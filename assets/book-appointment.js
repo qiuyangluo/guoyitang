@@ -16,6 +16,8 @@
           fridayPick: "We're closed Fridays. Please pick another day.",
           fridaySubmit: "We're closed Fridays. Choose Mon–Thu, Sat, or Sun.",
           missingDateTime: "Please choose a date and time slot.",
+          missingPhone: "Please enter your phone number.",
+          invalidPhone: "Please enter a valid phone number (at least 10 digits).",
           invalidFormat: "Invalid date or time.",
           unparseable: "Could not read the selected date and time.",
           network: "Network error. Please call the clinic to book.",
@@ -40,6 +42,8 @@
           fridayPick: "周五休诊，请改选其他日期。",
           fridaySubmit: "周五休诊，请选择周一至周四、周六或周日。",
           missingDateTime: "请选择日期与时间段。",
+          missingPhone: "请填写手机号码。",
+          invalidPhone: "请填写有效的手机号码（至少 10 位数字）。",
           invalidFormat: "日期或时间格式无效。",
           unparseable: "无法解析所选日期时间。",
           network: "网络错误，请致电诊所预约。",
@@ -135,6 +139,10 @@
   function parseYmd(v) {
     var p = v.split("-").map(Number);
     return p.length >= 3 ? p : null;
+  }
+
+  function phoneDigits(raw) {
+    return String(raw || "").replace(/\D/g, "");
   }
 
   function sameYmd(a, b) {
@@ -414,6 +422,26 @@
       showErr(T.missingDateTime);
       bookEvent("book_submit_validation_failed", {
         failure_reason: "missing_date_or_time",
+        has_phone: hasPhone,
+        has_notes: hasNotes,
+      });
+      return;
+    }
+
+    if (!phone) {
+      showErr(T.missingPhone);
+      bookEvent("book_submit_validation_failed", {
+        failure_reason: "missing_phone",
+        has_phone: hasPhone,
+        has_notes: hasNotes,
+      });
+      return;
+    }
+
+    if (phoneDigits(phone).length < 10) {
+      showErr(T.invalidPhone);
+      bookEvent("book_submit_validation_failed", {
+        failure_reason: "invalid_phone",
         has_phone: hasPhone,
         has_notes: hasNotes,
       });

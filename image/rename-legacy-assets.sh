@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Run from repo root: bash image/rename-legacy-assets.sh
-# Renames WordPress-era files to the ASCII names used in HTML/CSS (same format, .jpeg→.jpg where listed).
+# Renames WordPress-era files already placed in image/ to ASCII names used in HTML/CSS.
+# Prefer copying from the saved export: bash image/import-from-wp-export.sh
 set -euo pipefail
 cd "$(dirname "$0")"
 
@@ -20,6 +21,9 @@ mv_if "4-leguixiang.jpeg" "photo-doctor-yue-herbal.jpg"
 mv_if "fan-profile-985x1024.jpeg" "photo-therapist-fan-kelly.jpg"
 mv_if "sun-profile-932x1024.jpeg" "photo-therapist-sun-quanying.jpg"
 mv_if "国医堂刘师傅照片-683x1024.jpeg" "photo-therapist-liu.jpg"
+mv_if "yang-profile.jpeg" "photo-therapist-yang-michael.jpg"
+mv_if "IMG_6336-copy-1024x991.jpeg" "photo-therapist-fu-mark.jpg"
+mv_if "IMG_6335-copy-1024x963.jpeg" "photo-therapist-liu-yuan-michael.jpg"
 mv_if "微信二维码-绿色.jpeg" "guoyitang-wechat-qr.jpg"
 mv_if "cropped-guoyitang-icon-32x32.jpg" "guoyitang-icon-32.jpg"
 mv_if "cropped-guoyitang-icon-180x180.jpg" "guoyitang-icon-180.jpg"

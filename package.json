@@ -4,9 +4,11 @@
     "googleapis": "^146.0.0"
   },
   "devDependencies": {
-    "clean-css-cli": "^5.6.3"
+    "clean-css-cli": "^5.6.3",
+    "serve": "^14.2.4"
   },
   "scripts": {
-    "build:css": "cleancss -O2 assets/main.css -o assets/main.min.css"
+    "build:css": "cleancss -O2 assets/main.css -o assets/main.min.css",
+    "dev": "serve . -l 8080"
   }
 }

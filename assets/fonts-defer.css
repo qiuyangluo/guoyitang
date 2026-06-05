@@ -1,4 +1,2 @@
-/* Async-loaded (see HTML media=print onload). Only regular + bold — not full style.css (~2MB+ subset woff2). */
-@import url("https://fonts.googleapis.com/css2?family=ZCOOL+XiaoWei&display=swap");
-@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-regular.css");
-@import url("https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/lxgwwenkai-bold.css");
+/* Astra / Elementor reference fonts (guoyitangus.com) */
+@import url("https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@600&family=Noto+Serif+SC:wght@400;600;700&family=Work+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap");
