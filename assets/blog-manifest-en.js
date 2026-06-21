@@ -1,7 +1,16 @@
 /* English blog listing — keep in sync with assets/blog-manifest.js slugs/dates/authors. */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-05-24",
+  updated: "2026-06-18",
   posts: [
+    {
+      slug: "summer-heat-health-tips-tcm",
+      title:
+        "Summer health tips: prevent heat stress, protect digestion, and sleep steadily",
+      date: "2026-06-18",
+      excerpt:
+        "Hydration, air conditioning, digestion-friendly meals, sleep rhythm, light exercise, and red flags for summer care from a TCM perspective. Education only—see a licensed clinician.",
+      author: "Guoyitang",
+    },
     {
       slug: "summer-dampness-spleen-tcm",
       title:
