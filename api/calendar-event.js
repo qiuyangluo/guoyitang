@@ -118,6 +118,21 @@ function calendarErrorCode(err) {
   return err.code || err.response?.status;
 }
 
+function formatChineseDateTime(value) {
+  const match = /^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/.exec(value || "");
+  if (!match) return value;
+
+  const year = parseInt(match[1], 10);
+  const month = parseInt(match[2], 10);
+  const day = parseInt(match[3], 10);
+  const hour24 = parseInt(match[4], 10);
+  const minute = match[5];
+  const suffix = hour24 >= 12 ? "PM" : "AM";
+  const hour12 = hour24 % 12 || 12;
+
+  return `${year}年${month}月${day}日 ${hour12}:${minute}${suffix}`;
+}
+
 function smtpConfig() {
   const host = trimStr(process.env.SMTP_HOST);
   const user = trimStr(process.env.SMTP_USER);
@@ -163,9 +178,9 @@ async function sendBookingNotification({ summary, description, start, end, timeZ
   const text = [
     "国医堂官网收到新的预约信息。",
     "",
-    `预约开始时间：${start}`,
-    `预约结束时间：${end}`,
-    `时区：${timeZone}`,
+    `预约开始时间：${formatChineseDateTime(start)}`,
+    `预约结束时间：${formatChineseDateTime(end)}`,
+    `时区：美国纽约时间`,
     "",
     description,
   ].join("\n");
