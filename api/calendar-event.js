@@ -111,6 +111,10 @@ function notificationAttendees() {
     .map((email) => ({ email }));
 }
 
+function calendarErrorCode(err) {
+  return err.code || err.response?.status;
+}
+
 /** Gregorian weekday 0=Sun … 5=Fri for calendar Y-M-D (UTC noon, unambiguous). */
 function calendarWeekdayFri(y, m, d) {
   return new Date(Date.UTC(y, m - 1, d, 12, 0, 0)).getUTCDay() === 5;
@@ -218,21 +222,42 @@ module.exports = async (req, res) => {
     };
     if (attendees.length) resource.attendees = attendees;
 
-    const { data } = await cal.events.insert({
-      calendarId,
-      requestBody: resource,
-      sendUpdates: attendees.length ? "all" : "none",
-    });
+    let data;
+    let notifiedEmails = attendees.map((attendee) => attendee.email);
+    try {
+      const inserted = await cal.events.insert({
+        calendarId,
+        requestBody: resource,
+        sendUpdates: attendees.length ? "all" : "none",
+      });
+      data = inserted.data;
+    } catch (err) {
+      if (!attendees.length || calendarErrorCode(err) !== 403) throw err;
+
+      console.error(
+        "calendar-event invite notification failed; retrying without attendees:",
+        err.message
+      );
+      const fallbackResource = { ...resource };
+      delete fallbackResource.attendees;
+      const inserted = await cal.events.insert({
+        calendarId,
+        requestBody: fallbackResource,
+        sendUpdates: "none",
+      });
+      data = inserted.data;
+      notifiedEmails = [];
+    }
 
     return res.status(201).json({
       ok: true,
       htmlLink: data.htmlLink || null,
       eventId: data.id || null,
-      notifiedEmails: attendees.map((attendee) => attendee.email),
+      notifiedEmails,
     });
   } catch (err) {
     console.error("calendar-event insert:", err.message);
-    const code = err.code || err.response?.status;
+    const code = calendarErrorCode(err);
     return res.status(502).json({
       error: "Calendar API error",
       detail: code ? String(code) : undefined,
