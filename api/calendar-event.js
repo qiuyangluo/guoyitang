@@ -9,6 +9,7 @@
  *   CALENDAR_INGEST_SECRET — optional; if set, require Authorization: Bearer <secret>
  *   EVENT_DEFAULT_LOCATION — optional address string
  *   APPOINTMENT_NOTIFICATION_EMAILS — optional comma-separated notification emails
+ *   RESEND_API_KEY / RESEND_FROM — optional Resend email sender config
  *   SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS — optional email sender config
  *   SMTP_FROM — optional sender; defaults to SMTP_USER
  */
@@ -132,10 +133,47 @@ function smtpConfig() {
   };
 }
 
+async function sendWithResend({ to, subject, text }) {
+  const apiKey = trimStr(process.env.RESEND_API_KEY);
+  const from = trimStr(process.env.RESEND_FROM, 320);
+  if (!apiKey || !from) return false;
+
+  const response = await fetch("https://api.resend.com/emails", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${apiKey}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ from, to, subject, text }),
+  });
+
+  if (!response.ok) {
+    const detail = await response.text().catch(() => "");
+    throw new Error(`Resend API error ${response.status}${detail ? `: ${detail}` : ""}`);
+  }
+
+  return true;
+}
+
 async function sendBookingNotification({ summary, description, start, end, timeZone }) {
-  const cfg = smtpConfig();
   const to = notificationEmails();
-  if (!cfg || !to.length) return [];
+  if (!to.length) return [];
+
+  const subject = `New website booking: ${summary}`;
+  const text = [
+    "New appointment request received from guoyitangus.com.",
+    "",
+    `Start: ${start}`,
+    `End: ${end}`,
+    `Time zone: ${timeZone}`,
+    "",
+    description,
+  ].join("\n");
+
+  if (await sendWithResend({ to, subject, text })) return to;
+
+  const cfg = smtpConfig();
+  if (!cfg) return [];
 
   const transporter = nodemailer.createTransport({
     host: cfg.host,
@@ -144,20 +182,7 @@ async function sendBookingNotification({ summary, description, start, end, timeZ
     auth: cfg.auth,
   });
 
-  await transporter.sendMail({
-    from: cfg.from,
-    to,
-    subject: `New website booking: ${summary}`,
-    text: [
-      "New appointment request received from guoyitangus.com.",
-      "",
-      `Start: ${start}`,
-      `End: ${end}`,
-      `Time zone: ${timeZone}`,
-      "",
-      description,
-    ].join("\n"),
-  });
+  await transporter.sendMail({ from: cfg.from, to, subject, text });
 
   return to;
 }
