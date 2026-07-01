@@ -127,10 +127,10 @@ function formatChineseDateTime(value) {
   const day = parseInt(match[3], 10);
   const hour24 = parseInt(match[4], 10);
   const minute = match[5];
-  const suffix = hour24 >= 12 ? "PM" : "AM";
+  const suffix = hour24 >= 12 ? "下午" : "上午";
   const hour12 = hour24 % 12 || 12;
 
-  return `${year}年${month}月${day}日 ${hour12}:${minute}${suffix}`;
+  return `${year}年${month}月${day}日 ${suffix}${hour12}:${minute}`;
 }
 
 function smtpConfig() {
