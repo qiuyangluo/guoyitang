@@ -8,6 +8,7 @@
  *   CALENDAR_ALLOWED_ORIGINS — comma-separated; default guoyitangus.com + localhost
  *   CALENDAR_INGEST_SECRET — optional; if set, require Authorization: Bearer <secret>
  *   EVENT_DEFAULT_LOCATION — optional address string
+ *   APPOINTMENT_NOTIFICATION_EMAILS — optional comma-separated notification emails
  */
 
 const { google } = require("googleapis");
@@ -19,6 +20,10 @@ const DEFAULT_CALENDAR_ID =
 const DEFAULT_LOCATION =
   process.env.EVENT_DEFAULT_LOCATION ||
   "142-38 37th Ave #1C1D, Flushing, NY 11354";
+
+const DEFAULT_NOTIFICATION_EMAILS =
+  process.env.APPOINTMENT_NOTIFICATION_EMAILS ||
+  "jbj899@yahoo.com,guoyitang11366@gmail.com";
 
 const MAX_BODY = 48 * 1024;
 
@@ -97,6 +102,13 @@ function trimStr(v, max) {
   if (v == null) return "";
   const s = String(v).trim();
   return max ? s.slice(0, max) : s;
+}
+
+function notificationAttendees() {
+  return DEFAULT_NOTIFICATION_EMAILS.split(",")
+    .map((email) => trimStr(email, 320))
+    .filter(Boolean)
+    .map((email) => ({ email }));
 }
 
 /** Gregorian weekday 0=Sun … 5=Fri for calendar Y-M-D (UTC noon, unambiguous). */
@@ -185,6 +197,7 @@ module.exports = async (req, res) => {
 
   const description = lines.join("\n");
   const location = trimStr(body.location, 500) || DEFAULT_LOCATION;
+  const attendees = notificationAttendees();
 
   const calendarId = trimStr(process.env.GOOGLE_CALENDAR_ID) || DEFAULT_CALENDAR_ID;
 
@@ -203,17 +216,19 @@ module.exports = async (req, res) => {
       start: { dateTime: start, timeZone },
       end: { dateTime: end, timeZone },
     };
+    if (attendees.length) resource.attendees = attendees;
 
     const { data } = await cal.events.insert({
       calendarId,
       requestBody: resource,
-      sendUpdates: "none",
+      sendUpdates: attendees.length ? "all" : "none",
     });
 
     return res.status(201).json({
       ok: true,
       htmlLink: data.htmlLink || null,
       eventId: data.id || null,
+      notifiedEmails: attendees.map((attendee) => attendee.email),
     });
   } catch (err) {
     console.error("calendar-event insert:", err.message);
