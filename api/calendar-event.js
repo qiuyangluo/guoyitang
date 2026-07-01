@@ -9,9 +9,12 @@
  *   CALENDAR_INGEST_SECRET — optional; if set, require Authorization: Bearer <secret>
  *   EVENT_DEFAULT_LOCATION — optional address string
  *   APPOINTMENT_NOTIFICATION_EMAILS — optional comma-separated notification emails
+ *   SMTP_HOST / SMTP_PORT / SMTP_USER / SMTP_PASS — optional email sender config
+ *   SMTP_FROM — optional sender; defaults to SMTP_USER
  */
 
 const { google } = require("googleapis");
+const nodemailer = require("nodemailer");
 
 const DEFAULT_CALENDAR_ID =
   process.env.GOOGLE_CALENDAR_ID ||
@@ -104,15 +107,59 @@ function trimStr(v, max) {
   return max ? s.slice(0, max) : s;
 }
 
-function notificationAttendees() {
+function notificationEmails() {
   return DEFAULT_NOTIFICATION_EMAILS.split(",")
     .map((email) => trimStr(email, 320))
-    .filter(Boolean)
-    .map((email) => ({ email }));
+    .filter(Boolean);
 }
 
 function calendarErrorCode(err) {
   return err.code || err.response?.status;
+}
+
+function smtpConfig() {
+  const host = trimStr(process.env.SMTP_HOST);
+  const user = trimStr(process.env.SMTP_USER);
+  const pass = trimStr(process.env.SMTP_PASS);
+  if (!host || !user || !pass) return null;
+  const port = parseInt(process.env.SMTP_PORT || "", 10);
+  return {
+    host,
+    port: Number.isFinite(port) ? port : 465,
+    secure: String(process.env.SMTP_SECURE || "true").toLowerCase() !== "false",
+    auth: { user, pass },
+    from: trimStr(process.env.SMTP_FROM, 320) || user,
+  };
+}
+
+async function sendBookingNotification({ summary, description, start, end, timeZone }) {
+  const cfg = smtpConfig();
+  const to = notificationEmails();
+  if (!cfg || !to.length) return [];
+
+  const transporter = nodemailer.createTransport({
+    host: cfg.host,
+    port: cfg.port,
+    secure: cfg.secure,
+    auth: cfg.auth,
+  });
+
+  await transporter.sendMail({
+    from: cfg.from,
+    to,
+    subject: `New website booking: ${summary}`,
+    text: [
+      "New appointment request received from guoyitangus.com.",
+      "",
+      `Start: ${start}`,
+      `End: ${end}`,
+      `Time zone: ${timeZone}`,
+      "",
+      description,
+    ].join("\n"),
+  });
+
+  return to;
 }
 
 /** Gregorian weekday 0=Sun … 5=Fri for calendar Y-M-D (UTC noon, unambiguous). */
@@ -201,7 +248,6 @@ module.exports = async (req, res) => {
 
   const description = lines.join("\n");
   const location = trimStr(body.location, 500) || DEFAULT_LOCATION;
-  const attendees = notificationAttendees();
 
   const calendarId = trimStr(process.env.GOOGLE_CALENDAR_ID) || DEFAULT_CALENDAR_ID;
 
@@ -220,33 +266,24 @@ module.exports = async (req, res) => {
       start: { dateTime: start, timeZone },
       end: { dateTime: end, timeZone },
     };
-    if (attendees.length) resource.attendees = attendees;
 
-    let data;
-    let notifiedEmails = attendees.map((attendee) => attendee.email);
+    const { data } = await cal.events.insert({
+      calendarId,
+      requestBody: resource,
+      sendUpdates: "none",
+    });
+
+    let notifiedEmails = [];
     try {
-      const inserted = await cal.events.insert({
-        calendarId,
-        requestBody: resource,
-        sendUpdates: attendees.length ? "all" : "none",
+      notifiedEmails = await sendBookingNotification({
+        summary,
+        description,
+        start,
+        end,
+        timeZone,
       });
-      data = inserted.data;
     } catch (err) {
-      if (!attendees.length || calendarErrorCode(err) !== 403) throw err;
-
-      console.error(
-        "calendar-event invite notification failed; retrying without attendees:",
-        err.message
-      );
-      const fallbackResource = { ...resource };
-      delete fallbackResource.attendees;
-      const inserted = await cal.events.insert({
-        calendarId,
-        requestBody: fallbackResource,
-        sendUpdates: "none",
-      });
-      data = inserted.data;
-      notifiedEmails = [];
+      console.error("calendar-event email notification:", err.message);
     }
 
     return res.status(201).json({
