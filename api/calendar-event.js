@@ -159,13 +159,13 @@ async function sendBookingNotification({ summary, description, start, end, timeZ
   const to = notificationEmails();
   if (!to.length) return [];
 
-  const subject = `New website booking: ${summary}`;
+  const subject = `新的官网预约：${summary}`;
   const text = [
-    "New appointment request received from guoyitangus.com.",
+    "国医堂官网收到新的预约信息。",
     "",
-    `Start: ${start}`,
-    `End: ${end}`,
-    `Time zone: ${timeZone}`,
+    `预约开始时间：${start}`,
+    `预约结束时间：${end}`,
+    `时区：${timeZone}`,
     "",
     description,
   ].join("\n");
