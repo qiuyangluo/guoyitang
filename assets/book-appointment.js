@@ -28,6 +28,7 @@
           successNew: "Book another visit",
           contactLink: "Contact",
           submitting: "Submitting…",
+          submitSuccess: "Booked",
         }
       : {
           today: "今天",
@@ -54,6 +55,7 @@
           successNew: "再约一次",
           contactLink: "联系我们",
           submitting: "提交中…",
+          submitSuccess: "预约成功",
         };
 
   var SLOT_MS = 60 * 60 * 1000;
@@ -84,6 +86,14 @@
     submitBtn.disabled = on;
     submitBtn.setAttribute("aria-busy", on ? "true" : "false");
     submitBtn.textContent = on ? T.submitting : submitBtnDefaultText;
+  }
+
+  function setSubmitSuccess() {
+    submitting = false;
+    if (!submitBtn) return;
+    submitBtn.disabled = true;
+    submitBtn.setAttribute("aria-busy", "false");
+    submitBtn.textContent = T.submitSuccess;
   }
 
   function bookEvent(name, params) {
@@ -321,6 +331,7 @@
   }
 
   function showSuccessPanel(dateStr, timeStr) {
+    setSubmitSuccess();
     form.hidden = true;
     if (stepsEl) stepsEl.hidden = true;
     if (successPanel) {
