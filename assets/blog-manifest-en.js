@@ -1,7 +1,15 @@
 /* English blog listing — keep in sync with assets/blog-manifest.js slugs/dates/authors. */
 window.__BLOG_MANIFEST__ = {
-  updated: "2026-06-18",
+  updated: "2026-07-02",
   posts: [
+    {
+      slug: "nervous-system-meridians-difference",
+      title: "Nervous system vs. meridians: anatomy and the TCM channel model explained",
+      date: "2026-07-02",
+      excerpt:
+        "The nervous system is an anatomical signal network; meridians are a TCM model for Qi, blood, organ relationships, and body-surface responses. They may overlap, but they are not the same thing.",
+      author: "Guoyitang",
+    },
     {
       slug: "summer-heat-health-tips-tcm",
       title:

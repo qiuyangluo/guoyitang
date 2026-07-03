@@ -145,6 +145,22 @@
     return String(raw || "").replace(/\D/g, "");
   }
 
+  function formatPhoneNumber(raw) {
+    var digits = phoneDigits(raw).slice(0, 10);
+    if (digits.length <= 3) return digits;
+    if (digits.length <= 6) {
+      return "(" + digits.slice(0, 3) + ") " + digits.slice(3);
+    }
+    return (
+      "(" +
+      digits.slice(0, 3) +
+      ") " +
+      digits.slice(3, 6) +
+      "-" +
+      digits.slice(6)
+    );
+  }
+
   function sameYmd(a, b) {
     return a.getFullYear() === b.getFullYear() &&
       a.getMonth() === b.getMonth() &&
@@ -225,6 +241,7 @@
   var datePills = [];
   var dateInput = form.querySelector('input[name="date"]');
   var timeHidden = form.querySelector('input[name="time"]');
+  var phoneInput = form.querySelector('input[name="phone"]');
   var timeButtons = form.querySelectorAll(".book-time-slot");
 
   function setQuickPillSelected(ymd) {
@@ -372,6 +389,16 @@
     });
   }
 
+  if (phoneInput) {
+    phoneInput.maxLength = 14;
+    phoneInput.addEventListener("input", function () {
+      phoneInput.value = formatPhoneNumber(phoneInput.value);
+    });
+    phoneInput.addEventListener("blur", function () {
+      phoneInput.value = formatPhoneNumber(phoneInput.value);
+    });
+  }
+
   timeButtons.forEach(function (btn) {
     btn.setAttribute("aria-pressed", "false");
     btn.addEventListener("click", function () {
@@ -411,7 +438,8 @@
     bookEvent("book_submit_click");
 
     var fd = new FormData(form);
-    var phone = String(fd.get("phone") || "").trim();
+    var phone = formatPhoneNumber(fd.get("phone"));
+    if (phoneInput) phoneInput.value = phone;
     var dateStr = fd.get("date");
     var timeStr = fd.get("time") || "";
     var notes = String(fd.get("notes") || "").trim();

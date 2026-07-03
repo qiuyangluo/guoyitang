@@ -63,6 +63,8 @@
 .book-form input::placeholder, .book-form textarea::placeholder { color: var(--text-light); opacity: 1; }
 .book-form textarea { min-height: 4rem; resize: vertical; }
 .book-step-label { font-weight: 600; font-size: 0.9rem; color: var(--ink); }
+.book-required-note { margin: -0.25rem 0 0; font-size: 0.84rem; color: var(--text-medium); text-align: left; width: min(100%, 28rem); }
+.book-required { color: #b42318; font-weight: 700; margin-left: 0.15rem; }
 .book-date-hint, .book-time-hint { margin: 0.25rem 0 0; font-size: 0.88rem; color: var(--text-medium); font-weight: 500; }
 .book-quick-dates { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.35rem; }
 .book-date-pill {
@@ -230,9 +232,10 @@ gtag('config', 'AW-17707030959');
 <li class="book-steps__item" data-step="3">3 提交</li>
 </ol>
 <form class="book-form" id="book-form" novalidate="">
+<p class="book-required-note"><span class="book-required">*</span> 为必填项</p>
 <div class="book-form__datetime">
 <div class="book-date-step">
-<span class="book-step-label">选择日期</span>
+<span class="book-step-label">选择日期 <span aria-label="必填" class="book-required">*</span></span>
 <p class="book-date-hint">周五休诊，请从下方可约日期中选择</p>
 <div aria-label="快速选日期" class="book-quick-dates" id="book-quick-dates" role="group"></div>
 <details class="book-more-dates">
@@ -242,7 +245,7 @@ gtag('config', 'AW-17707030959');
 </div>
 <input name="time" type="hidden" value=""/>
 <div aria-labelledby="book-time-heading" class="book-time book-time--locked" id="book-time-section" role="group">
-<span class="book-step-label" id="book-time-heading">选择时段</span>
+<span class="book-step-label" id="book-time-heading">选择时段 <span aria-label="必填" class="book-required">*</span></span>
 <p class="book-time-hint" id="book-time-hint">请先选择日期</p>
 <div class="book-time-period">
 <span class="book-time-period__label">上午</span>
@@ -272,7 +275,7 @@ gtag('config', 'AW-17707030959');
 </div>
 </div>
 <div class="book-form__extra book-form__extra--locked" id="book-form-extra">
-<label>手机号码 <input autocomplete="tel" inputmode="tel" name="phone" placeholder="例：718-555-0100" required="" type="tel"/></label>
+<label><span>手机号码 <span aria-label="必填" class="book-required">*</span></span><input autocomplete="tel" inputmode="tel" name="phone" placeholder="例：718-555-0100" required="" type="tel"/></label>
 <label>备注（选填） <textarea name="notes" placeholder="主要症状、希望使用的语言等"></textarea></label>
 </div>
 <div class="book-form__actions">
