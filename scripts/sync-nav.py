@@ -57,6 +57,7 @@ def active_key(path: Path) -> str:
         "doctors": "doctors",
         "successful-cases": "cases",
         "patient-review": "reviews",
+        "activities": "activities",
         "contact-us": "contact",
         "book": "book",
         "blog": "blog",
@@ -76,9 +77,10 @@ def render_nav(path: Path) -> str:
 
     if en:
         home, services, about, doctors = "/en/", "/en/services", "/en/about-us", "/en/doctors"
-        cases, reviews, contact, book = (
+        cases, reviews, activities, contact, book = (
             "/en/successful-cases",
             "/en/patient-review",
+            "/en/activities",
             "/en/contact-us",
             "/en/book",
         )
@@ -90,6 +92,7 @@ def render_nav(path: Path) -> str:
             doctors="Our Team",
             cases="Success Stories",
             reviews="Patient Reviews",
+            activities="Clinic Activities",
             contact="Contact",
             book="Book Online",
             lang="中文",
@@ -100,9 +103,10 @@ def render_nav(path: Path) -> str:
         img = "/image/guoyitang-logo-header-125x42.webp"
     else:
         home, services, about, doctors = "/", "/services", "/about-us", "/doctors"
-        cases, reviews, contact, book = (
+        cases, reviews, activities, contact, book = (
             "/successful-cases",
             "/patient-review",
+            "/activities",
             "/contact-us",
             "/book",
         )
@@ -114,6 +118,7 @@ def render_nav(path: Path) -> str:
             doctors="国医堂团队",
             cases="成功案例",
             reviews="病人好评",
+            activities="诊所活动",
             contact="联系我们",
             book="在线预约",
             lang="English",
@@ -130,6 +135,7 @@ def render_nav(path: Path) -> str:
         "doctors": ac(key == "doctors"),
         "cases": ac(key == "cases"),
         "reviews": ac(key == "reviews"),
+        "activities": ac(key == "activities"),
         "contact": ac(key == "contact"),
         "book": ac(key == "book"),
     }
@@ -150,6 +156,7 @@ def render_nav(path: Path) -> str:
 <li><a href="{reviews}"{a["reviews"]}>{labels["reviews"]}</a></li>
 </ul>
 </li>
+<li><a href="{activities}"{a["activities"]}>{labels["activities"]}</a></li>
 <li><a href="{contact}"{a["contact"]}>{labels["contact"]}</a></li>
 <li><a class="nav-book" href="{book}"{a["book"]}>{labels["book"]}</a></li>
 </ul>
@@ -166,6 +173,7 @@ def render_nav(path: Path) -> str:
 <li><a href="{doctors}"{a["doctors"]}>{labels["doctors"]}</a></li>
 <li><a href="{cases}"{a["cases"]}>{labels["cases"]}</a></li>
 <li><a href="{reviews}"{a["reviews"]}>{labels["reviews"]}</a></li>
+<li><a href="{activities}"{a["activities"]}>{labels["activities"]}</a></li>
 <li><a href="{contact}"{a["contact"]}>{labels["contact"]}</a></li>
 <li><a href="{book}"{a["book"]}>{labels["book"]}</a></li>
 </ul>
