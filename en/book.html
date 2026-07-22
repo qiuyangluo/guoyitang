@@ -29,8 +29,7 @@
   max-width: 28rem;
   width: min(100%, 28rem);
 }
-.book-layout #book-err,
-.book-layout .book-success { margin-left: auto; margin-right: auto; }
+.book-layout #book-err { margin-left: auto; margin-right: auto; }
 .book-steps {
   display: flex;
   justify-content: center;
@@ -137,29 +136,6 @@
 .book-alt-contact__link { text-decoration: underline; }
 .book-note { margin: 0 0 0.75rem; font-size: 0.95rem; color: var(--text-medium); line-height: 1.55; }
 #book-err { color: #b42318; font-size: 0.9rem; display: none; margin-bottom: 0.75rem; }
-.book-success {
-  width: min(100%, 28rem);
-  padding: 1.35rem 1.1rem;
-  border-radius: 12px;
-  border: 1px solid rgba(27, 94, 32, 0.35);
-  background: linear-gradient(180deg, rgba(27, 94, 32, 0.08) 0%, rgba(255, 255, 255, 0.95) 100%);
-  text-align: center;
-}
-.book-success__icon {
-  width: 2.75rem;
-  height: 2.75rem;
-  margin: 0 auto 0.65rem;
-  border-radius: 50%;
-  background: #1b5e20;
-  color: #fff;
-  font-size: 1.35rem;
-  line-height: 2.75rem;
-  font-weight: 700;
-}
-.book-success__title { margin: 0 0 0.5rem; font-size: 1.25rem; color: #1b5e20; }
-.book-success__detail { margin: 0 0 0.65rem; font-size: 1.05rem; font-weight: 700; color: var(--ink); }
-.book-success__hint { margin: 0 0 1rem; font-size: 0.92rem; color: var(--text-medium); line-height: 1.55; }
-.book-success__hint a { color: var(--brand); font-weight: 600; }
 </style>
 <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-M3EJ79RT1R"></script>
 <script>
@@ -286,13 +262,6 @@ gtag('config', 'AW-17707030959');
 </div>
 <p class="book-alt-contact">Prefer to call? <a class="book-alt-contact__link" href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">718-888-1133</a> · <a href="/en/contact-us">Contact</a></p>
 </form>
-<div class="book-success" hidden="" id="book-success">
-<div aria-hidden="true" class="book-success__icon">✓</div>
-<h2 class="book-success__title">Request received</h2>
-<p class="book-success__detail" id="book-success-detail"></p>
-<p class="book-success__hint">We've saved your request. To reschedule, call <a href="tel:+17188881133" onclick="return gtag_report_phone_conversion('tel:+17188881133');">718-888-1133</a>.</p>
-<button class="learn-more" id="book-success-new" type="button">Book another visit</button>
-</div>
 </div>
 </section>
 </div>

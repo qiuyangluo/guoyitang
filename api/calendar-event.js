@@ -172,7 +172,9 @@ async function sendWithResend({ to, subject, text }) {
 
 async function sendBookingNotification({ summary, description, start, end, timeZone }) {
   const to = notificationEmails();
-  if (!to.length) return [];
+  if (!to.length) {
+    throw new Error("No notification recipients configured");
+  }
 
   const subject = `新的官网预约：${summary}`;
   const text = [
@@ -188,7 +190,9 @@ async function sendBookingNotification({ summary, description, start, end, timeZ
   if (await sendWithResend({ to, subject, text })) return to;
 
   const cfg = smtpConfig();
-  if (!cfg) return [];
+  if (!cfg) {
+    throw new Error("Email notification is not configured");
+  }
 
   const transporter = nodemailer.createTransport({
     host: cfg.host,
@@ -324,12 +328,31 @@ module.exports = async (req, res) => {
       });
     } catch (err) {
       console.error("calendar-event email notification:", err.message);
+      return res.status(502).json({
+        ok: false,
+        error: "Email notification failed",
+        eventId: data.id || null,
+        emailSent: false,
+        notifiedEmails: [],
+      });
+    }
+
+    if (!notifiedEmails.length) {
+      console.error("calendar-event email notification: empty recipient list");
+      return res.status(502).json({
+        ok: false,
+        error: "Email notification failed",
+        eventId: data.id || null,
+        emailSent: false,
+        notifiedEmails: [],
+      });
     }
 
     return res.status(201).json({
       ok: true,
       htmlLink: data.htmlLink || null,
       eventId: data.id || null,
+      emailSent: true,
       notifiedEmails,
     });
   } catch (err) {

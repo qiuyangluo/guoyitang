@@ -22,11 +22,8 @@
           unparseable: "Could not read the selected date and time.",
           network: "Network error. Please call the clinic to book.",
           apiFail: "Could not save. Please call the clinic or try again.",
-          successTitle: "Request received",
-          successDetail: "Preferred visit",
-          successHint: "We've saved your request. To reschedule, call",
-          successNew: "Book another visit",
-          contactLink: "Contact",
+          emailFail:
+            "Booking saved, but the clinic email alert failed. Please call 718-888-1133 to confirm.",
           submitting: "Submitting…",
           submitSuccess: "Booked",
         }
@@ -49,11 +46,8 @@
           unparseable: "无法解析所选日期时间。",
           network: "网络错误，请致电诊所预约。",
           apiFail: "提交失败，请改打电话预约或稍后再试。",
-          successTitle: "预约已收到",
-          successDetail: "您的到诊意向",
-          successHint: "我们已记录您的预约。如需改期请致电",
-          successNew: "再约一次",
-          contactLink: "联系我们",
+          emailFail:
+            "预约已写入日历，但邮件提醒发送失败。请致电 718-888-1133 确认。",
           submitting: "提交中…",
           submitSuccess: "预约成功",
         };
@@ -64,15 +58,12 @@
 
   var form = document.getElementById("book-form");
   var errEl = document.getElementById("book-err");
-  var successPanel = document.getElementById("book-success");
-  var successDetailEl = document.getElementById("book-success-detail");
-  var successNewBtn = document.getElementById("book-success-new");
   var quickDatesEl = document.getElementById("book-quick-dates");
   var timeSection = document.getElementById("book-time-section");
   var timeHintEl = document.getElementById("book-time-hint");
   var extraSection = document.getElementById("book-form-extra");
   var stepItems = document.querySelectorAll(".book-steps__item");
-  var stepsEl = document.querySelector(".book-steps");
+  var SUCCESS_PATH = LANG === "en" ? "/en/book-success" : "/book-success";
 
   if (!form) return;
 
@@ -189,34 +180,6 @@
     );
   }
 
-  function formatDisplayDateTime(dateStr, timeStr) {
-    var p = parseYmd(dateStr);
-    if (!p) return dateStr + " " + timeStr;
-    var d = new Date(p[0], p[1] - 1, p[2], 12, 0, 0);
-    var tp = timeStr.split(":");
-    var datePart =
-      T.weekdays[d.getDay()] +
-      " " +
-      (LANG === "en"
-        ? pad(d.getMonth() + 1) + "/" + pad(d.getDate()) + "/" + d.getFullYear()
-        : d.getFullYear() +
-          "年" +
-          (d.getMonth() + 1) +
-          "月" +
-          d.getDate() +
-          "日");
-    var h = parseInt(tp[0], 10);
-    var m = tp[1] || "00";
-    var timePart =
-      LANG === "en"
-        ? (h > 12 ? h - 12 : h === 0 ? 12 : h) +
-          ":" +
-          m +
-          (h >= 12 ? " pm" : " am")
-        : h + ":" + m;
-    return datePart + " · " + timePart;
-  }
-
   function updateSteps() {
     var dateStr = dateInput && dateInput.value;
     var timeStr = timeHidden && timeHidden.value;
@@ -330,16 +293,8 @@
     }
   }
 
-  function showSuccessPanel(dateStr, timeStr) {
+  function goToSuccessPage(dateStr, timeStr) {
     setSubmitSuccess();
-    form.hidden = true;
-    if (stepsEl) stepsEl.hidden = true;
-    if (successPanel) {
-      successPanel.hidden = false;
-      if (successDetailEl) {
-        successDetailEl.textContent = formatDisplayDateTime(dateStr, timeStr);
-      }
-    }
     showErr("");
     bookEvent("book_submit_success", {
       appointment_date: dateStr,
@@ -349,21 +304,13 @@
       appointment_date: dateStr,
       appointment_time: timeStr,
     });
-    successPanel && successPanel.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }
-
-  function resetBookingUi() {
-    setSubmitting(false);
-    form.hidden = false;
-    if (stepsEl) stepsEl.hidden = false;
-    if (successPanel) successPanel.hidden = true;
-    form.reset();
-    setQuickPillSelected("");
-    setSelectedTime("");
-    unlockTimeSection(false);
-    unlockExtraSection(false);
-    updateSteps();
-    showErr("");
+    window.location.assign(
+      SUCCESS_PATH +
+        "?date=" +
+        encodeURIComponent(dateStr) +
+        "&time=" +
+        encodeURIComponent(timeStr)
+    );
   }
 
   buildQuickDates();
@@ -421,14 +368,6 @@
       bookEvent("book_time_selected", { appointment_time: t });
     });
   });
-
-  if (successNewBtn) {
-    successNewBtn.addEventListener("click", function () {
-      resetBookingUi();
-      buildQuickDates();
-      form.scrollIntoView({ behavior: "smooth", block: "start" });
-    });
-  }
 
   form.addEventListener("reset", function () {
     setQuickPillSelected("");
@@ -549,18 +488,27 @@
       var ct = res.headers.get("content-type") || "";
       var j = ct.indexOf("application/json") !== -1 ? await res.json() : {};
 
-      if (res.ok && j.ok) {
-        showSuccessPanel(dateStr, timeStr);
+      if (res.ok && j.ok && j.emailSent) {
+        goToSuccessPage(dateStr, timeStr);
         return;
       }
 
+      var emailFailed =
+        j &&
+        (j.emailSent === false ||
+          j.error === "Email notification failed");
       bookEvent("book_submit_failed", {
-        failure_reason: "api_error",
+        failure_reason: emailFailed ? "email_notification_failed" : "api_error",
         http_status: res.status,
         has_phone: hasPhone,
         has_notes: hasNotes,
+        event_id: j && j.eventId ? j.eventId : undefined,
       });
-      showErr((j && j.error) || T.apiFail + " (" + res.status + ")");
+      showErr(
+        emailFailed
+          ? T.emailFail
+          : (j && j.error) || T.apiFail + " (" + res.status + ")"
+      );
       setSubmitting(false);
     } catch (_) {
       bookEvent("book_submit_failed", {
